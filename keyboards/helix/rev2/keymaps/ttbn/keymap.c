@@ -161,25 +161,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-
+void keyboard_post_init_user(void) {
+  for (int i = 0; i < 6; i++) {
+    rgblight_setrgb_at(0, 0, 0, i);
+  }
+  rgblight_set();
+}
 
 uint32_t layer_state_set_user(uint32_t state) {
   switch (biton32(state)) {
     case _QWERTY:
       for (int i = 0; i < 6; i++) {
-        setrgb(192, 0, 0, (LED_TYPE *)&led[i]);
+        setrgb(0, 0, 0, (LED_TYPE *)&led[i]);
       }
       rgblight_set();
       break;
     case _NUMPAD:
       for (int i = 0; i < 6; i++) {
-        setrgb(0, 192, 0, (LED_TYPE *)&led[i]);
+        setrgb(0, 128, 0, (LED_TYPE *)&led[i]);
       }
       rgblight_set();
       break;
     case _FUNCTION:
       for (int i = 0; i < 6; i++) {
-        setrgb(0, 0, 192,(LED_TYPE *)&led[i]);
+        setrgb(0, 0, 128,(LED_TYPE *)&led[i]);
       }
       rgblight_set();
       break;
