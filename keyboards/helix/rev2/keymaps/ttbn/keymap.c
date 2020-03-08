@@ -252,11 +252,11 @@ void matrix_update(struct CharacterMatrix *dest,
 }
 
 //assign the right code to your layers for OLED display
-#define L_BASE 0
-#define L_LOWER (1<<_LOWER)
-#define L_RAISE (1<<_RAISE)
-#define L_ADJUST (1<<_ADJUST)
-#define L_ADJUST_TRI (L_ADJUST|L_RAISE|L_LOWER)
+#define L_QWERTY 0
+#define L_NUMPAD (1<<_NUMPAD)
+#define L_FUNCTION (1<<_FUNCTION)
+//#define L_ADJUST (1<<_ADJUST)
+//#define L_ADJUST_TRI (L_ADJUST|L_RAISE|L_LOWER)
 
 static void render_logo(struct CharacterMatrix *matrix) {
 
@@ -291,19 +291,15 @@ static void render_layer_status(struct CharacterMatrix *matrix) {
   // Define layers here, Have not worked out how to have text displayed for each layer. Copy down the number you see and add a case for it below
   char buf[10];
   matrix_write_P(matrix, PSTR("Layer: "));
-    switch (layer_state) {
-        case L_BASE:
-           matrix_write_P(matrix, PSTR("Default"));
+    switch (get_highest_layer(layer_state)) {
+        case _QWERTY:
+           matrix_write_P(matrix, PSTR("Qwerty"));
            break;
-        case L_RAISE:
-           matrix_write_P(matrix, PSTR("Raise"));
+        case _NUMPAD:
+           matrix_write_P(matrix, PSTR("Numpad"));
            break;
-        case L_LOWER:
-           matrix_write_P(matrix, PSTR("Lower"));
-           break;
-        case L_ADJUST:
-        case L_ADJUST_TRI:
-           matrix_write_P(matrix, PSTR("Adjust"));
+        case _FUNCTION:
+           matrix_write_P(matrix, PSTR("Function"));
            break;
         default:
            matrix_write_P(matrix, PSTR("Undef-"));
