@@ -9,6 +9,7 @@
 #endif
 #ifdef SSD1306OLED
   #include "ssd1306.h"
+  #include "drivers/oled/oled_driver.h"
 #endif
 
 
@@ -115,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,_______,_______,_______,_______,_______,KC_DEL,KC_ENT,_______,_______,_______,_______,_______,KC_F15 \
       ),
 
-  
+
 };
 
 #else
@@ -205,7 +206,8 @@ void matrix_init_user(void) {
     #endif
     //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
     #ifdef SSD1306OLED
-        iota_gfx_init(!has_usb());   // turns on the display
+    //    iota_gfx_init(!has_usb());   // turns on the display
+        iota_gfx_init(true);  //trueで逆さまにする。
     #endif
 }
 
@@ -268,7 +270,7 @@ static void render_logo(struct CharacterMatrix *matrix) {
   matrix_write_P(matrix, helix_logo);
   //matrix_write_P(&matrix, PSTR(" Split keyboard kit"));
 }
-
+/*
 static void render_rgbled_status(bool full, struct CharacterMatrix *matrix) {
 #if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_ANIMATIONS)
   char buf[30];
@@ -286,23 +288,23 @@ static void render_rgbled_status(bool full, struct CharacterMatrix *matrix) {
   }
 #endif
 }
-
+*/
 static void render_layer_status(struct CharacterMatrix *matrix) {
   // Define layers here, Have not worked out how to have text displayed for each layer. Copy down the number you see and add a case for it below
   char buf[10];
-  matrix_write_P(matrix, PSTR("Layer: "));
+  matrix_write_P(matrix, PSTR("LAYER: "));
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
-           matrix_write_P(matrix, PSTR("Qwerty"));
+           matrix_write_P(matrix, PSTR("QWERTY"));
            break;
         case _NUMPAD:
-           matrix_write_P(matrix, PSTR("Numpad"));
+           matrix_write_P(matrix, PSTR("NUMPAD"));
            break;
         case _FUNCTION:
-           matrix_write_P(matrix, PSTR("Function"));
+           matrix_write_P(matrix, PSTR("FUNCTION"));
            break;
         default:
-           matrix_write_P(matrix, PSTR("Undef-"));
+           matrix_write_P(matrix, PSTR("UNDEF-"));
            snprintf(buf,sizeof(buf), "%ld", layer_state);
            matrix_write(matrix, buf);
     }
@@ -310,6 +312,97 @@ static void render_layer_status(struct CharacterMatrix *matrix) {
 
 void render_status(struct CharacterMatrix *matrix) {
 
+  static const char layer_moji[5][4][9] PROGMEM ={{
+      {0x95,0x96,0x97,0x98,0x99,0x9a,0x9b,0x9c,0},
+      {0xb5,0xb6,0xb7,0xb8,0xb9,0xba,0xbb,0xbc,0},
+      {0xd5,0xd6,0xd7,0xd8,0xd9,0xda,0xdb,0xdc,0} // 機能
+      },{
+      {0x9d,0x9e,0x9f,0x01,0x04,0x05,0x06,0x07,0},
+      {0xbd,0xbe,0xbf,0x02,0x08,0x09,0x40,0x0b,0},
+      {0xdd,0xde,0xdf,0x03,0x0c,0x0d,0x0e,0x0f,0} // 數鍵
+      },{
+      {0x88,0x89,0x8a,0x8b,0x8c,0},
+      {0xa8,0xa9,0xaa,0xab,0xac,0},
+      {0xc8,0xc9,0xca,0xcb,0xcc,0} //紋章
+      },{
+      {0x10,0x11,0x12,0x13,0},
+      {0x14,0x15,0x16,0x17,0},
+      {0x18,0x19,0x1a,0x1b,0} //寫
+      },{
+      {0x1c,0x1d,0x1e,0x1f,0},
+      {0x60,0x61,0x62,0x63,0},
+      {0x64,0x65,0x66,0x67,0} //編
+      //},{
+      //{0x68,0x69,0x6a,0x6b,0},
+      //{0x6c,0x6d,0x6e,0x6e,0},
+      //{0x6f,0x70,0x71,0x72,0} //大
+      }};
+
+  void caps_num(int gyou){
+    matrix_write_P(matrix, (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)) ? layer_moji[3][gyou] : PSTR("    "));
+    matrix_write_P(matrix, (host_keyboard_leds() & (1<<USB_LED_NUM_LOCK)) ? layer_moji[4][gyou] : PSTR("    "));
+    }
+
+  switch (get_highest_layer(layer_state)) {
+    case _QWERTY:
+      matrix_write_P(matrix, PSTR("        "));
+      matrix_write_P(matrix, layer_moji[2][0]);
+      caps_num(0);
+      matrix_write_P(matrix, PSTR("        "));
+      matrix_write_P(matrix, layer_moji[2][1]);
+      caps_num(1);
+      matrix_write_P(matrix, PSTR("        "));
+      matrix_write_P(matrix, layer_moji[2][2]);
+      caps_num(2);
+      break;
+    case _NUMPAD:
+      matrix_write_P(matrix, layer_moji[1][0]);
+      matrix_write_P(matrix, layer_moji[2][0]);
+      caps_num(0);
+      matrix_write_P(matrix, layer_moji[1][1]);
+      matrix_write_P(matrix, layer_moji[2][1]);
+      caps_num(1);
+      matrix_write_P(matrix, layer_moji[1][2]);
+      matrix_write_P(matrix, layer_moji[2][2]);
+      caps_num(2);
+      break;
+    case _FUNCTION:
+      matrix_write_P(matrix, layer_moji[0][0]);
+      matrix_write_P(matrix, PSTR("     "));
+      caps_num(0);
+      matrix_write_P(matrix, layer_moji[0][1]);
+      matrix_write_P(matrix, PSTR("     "));
+      caps_num(1);
+      matrix_write_P(matrix, layer_moji[0][2]);
+      matrix_write_P(matrix, PSTR("     "));
+      caps_num(2);
+      break;
+    default:
+      matrix_write_P(matrix, PSTR("        "));
+      matrix_write_P(matrix, layer_moji[2][0]);
+      matrix_write_P(matrix, PSTR("\n"));
+      matrix_write_P(matrix, PSTR("UNDEF-  "));
+      matrix_write_P(matrix, layer_moji[2][1]);
+      matrix_write_P(matrix, PSTR("\n"));
+      matrix_write_P(matrix, PSTR("        "));
+      matrix_write_P(matrix, layer_moji[2][2]);
+  }
+
+
+/*
+  static char caps[2][3]={{0x01,0x02,0},{0x03,0x04,0}};
+  if((host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK))){
+    matrix_write(matrix, caps[0]);
+    matrix_write_P(matrix, PSTR("\n"));
+    matrix_write(matrix, caps[0]);
+  }else{
+    matrix_write(matrix, caps[1]);
+    matrix_write_P(matrix, PSTR("\n"));
+    matrix_write(matrix, caps[1]);
+  }
+*/
+
+/*
   // Render to mode icon
   static const char os_logo[][2][3] PROGMEM  ={{{0x95,0x96,0},{0xb5,0xb6,0}},{{0x97,0x98,0},{0xb7,0xb8,0}}};
   if(keymap_config.swap_lalt_lgui==false){
@@ -335,6 +428,7 @@ void render_status(struct CharacterMatrix *matrix) {
                  PSTR("SCLK") : PSTR("    "));
   matrix_write_P(matrix, PSTR("\n"));
   render_rgbled_status(true, matrix);
+*/
 }
 
 
@@ -352,7 +446,7 @@ void iota_gfx_task_user(void) {
     render_status(&matrix);
   }else{
     render_logo(&matrix);
-    render_rgbled_status(false, &matrix);
+    //render_rgbled_status(false, &matrix);
     render_layer_status(&matrix);
   }
   matrix_update(&display, &matrix);

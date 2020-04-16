@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // place overrides here
 #define TAPPING_TERM 300
 #define SSD1306OLED
+#define MASTER_RIGHT
 // If you need more program area, try select and reduce rgblight modes to use.
 
 // Selection of RGBLIGHT MODE to use.
