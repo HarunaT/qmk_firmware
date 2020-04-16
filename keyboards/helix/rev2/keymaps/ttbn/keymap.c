@@ -115,17 +115,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,_______,_______,KC_DOWN,_______,TO(0),  KC_ENT,KC_GRV,_______,KC_END, KC_DOWN,KC_PGDN,_______,KC_F14 , \
       _______,_______,_______,_______,_______,_______,KC_DEL,KC_ENT,_______,_______,_______,_______,_______,KC_F15 \
       ),
-
-
 };
 
 #else
 #error "undefined keymaps"
 #endif
 
-
 #ifdef AUDIO_ENABLE
-
 float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
 float tone_dvorak[][2]     = SONG(DVORAK_SOUND);
 float tone_colemak[][2]    = SONG(COLEMAK_SOUND);
@@ -193,10 +189,6 @@ uint32_t layer_state_set_user(uint32_t state) {
   return state;
 }
 
-
-
-
-
 void matrix_init_user(void) {
     #ifdef AUDIO_ENABLE
         startup_user();
@@ -210,7 +202,6 @@ void matrix_init_user(void) {
         iota_gfx_init(true);  //trueで逆さまにする。
     #endif
 }
-
 
 #ifdef AUDIO_ENABLE
 
@@ -268,27 +259,8 @@ static void render_logo(struct CharacterMatrix *matrix) {
     0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,
     0};
   matrix_write_P(matrix, helix_logo);
-  //matrix_write_P(&matrix, PSTR(" Split keyboard kit"));
 }
-/*
-static void render_rgbled_status(bool full, struct CharacterMatrix *matrix) {
-#if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_ANIMATIONS)
-  char buf[30];
-  if(rgblight_config.enable) {
-      if (full) {
-          snprintf(buf, sizeof(buf), " LED %2d: %d,%d,%d ",
-                   rgblight_config.mode,
-                   rgblight_config.hue/RGBLIGHT_HUE_STEP,
-                   rgblight_config.sat/RGBLIGHT_SAT_STEP,
-                   rgblight_config.val/RGBLIGHT_VAL_STEP);
-      } else {
-          snprintf(buf, sizeof(buf), "[%2d] ",rgblight_config.mode);
-      }
-      matrix_write(matrix, buf);
-  }
-#endif
-}
-*/
+
 static void render_layer_status(struct CharacterMatrix *matrix) {
   // Define layers here, Have not worked out how to have text displayed for each layer. Copy down the number you see and add a case for it below
   char buf[10];
@@ -387,50 +359,7 @@ void render_status(struct CharacterMatrix *matrix) {
       matrix_write_P(matrix, PSTR("        "));
       matrix_write_P(matrix, layer_moji[2][2]);
   }
-
-
-/*
-  static char caps[2][3]={{0x01,0x02,0},{0x03,0x04,0}};
-  if((host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK))){
-    matrix_write(matrix, caps[0]);
-    matrix_write_P(matrix, PSTR("\n"));
-    matrix_write(matrix, caps[0]);
-  }else{
-    matrix_write(matrix, caps[1]);
-    matrix_write_P(matrix, PSTR("\n"));
-    matrix_write(matrix, caps[1]);
-  }
-*/
-
-/*
-  // Render to mode icon
-  static const char os_logo[][2][3] PROGMEM  ={{{0x95,0x96,0},{0xb5,0xb6,0}},{{0x97,0x98,0},{0xb7,0xb8,0}}};
-  if(keymap_config.swap_lalt_lgui==false){
-    matrix_write_P(matrix, os_logo[0][0]);
-    matrix_write_P(matrix, PSTR("\n"));
-    matrix_write_P(matrix, os_logo[0][1]);
-  }else{
-    matrix_write_P(matrix, os_logo[1][0]);
-    matrix_write_P(matrix, PSTR("\n"));
-    matrix_write_P(matrix, os_logo[1][1]);
-  }
-
-  matrix_write_P(matrix, PSTR(" "));
-  render_layer_status(matrix);
-  matrix_write_P(matrix, PSTR("\n"));
-
-  // Host Keyboard LED Status
-  matrix_write_P(matrix, (host_keyboard_leds() & (1<<USB_LED_NUM_LOCK)) ?
-                 PSTR("NUMLOCK") : PSTR("       "));
-  matrix_write_P(matrix, (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)) ?
-                 PSTR("CAPS") : PSTR("    "));
-  matrix_write_P(matrix, (host_keyboard_leds() & (1<<USB_LED_SCROLL_LOCK)) ?
-                 PSTR("SCLK") : PSTR("    "));
-  matrix_write_P(matrix, PSTR("\n"));
-  render_rgbled_status(true, matrix);
-*/
 }
-
 
 void iota_gfx_task_user(void) {
   struct CharacterMatrix matrix;
@@ -446,7 +375,6 @@ void iota_gfx_task_user(void) {
     render_status(&matrix);
   }else{
     render_logo(&matrix);
-    //render_rgbled_status(false, &matrix);
     render_layer_status(&matrix);
   }
   matrix_update(&display, &matrix);
