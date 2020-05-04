@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
    * | Shift|   Z  |   X  |   C  |   V  |   B  |TO(Nu)| S(0) |   N  |   M  |   ,  |   .  |   /  |  ]   |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * | Ctrl | S(V) | Alt  | GUI  |LANG2 |MO(Fn)| Bksp |Enter |SandS |LANG1 | JYEN |  @   |  [   |  _   |
+   * | Ctrl | Alt  | GUI  | S(V) |LANG2 |MO(Fn)| Bksp |Enter |SandS |LANG1 | JYEN |  @   |  [   |  _   |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_QWERTY] = LAYOUT( \
@@ -71,27 +71,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_ESC, KC_Q,   KC_W,   KC_E,   KC_R,    KC_T,                KC_Y,         KC_U,    KC_I,   KC_O,   KC_P,   KC_MINS, \
       KC_TAB, KC_A,   KC_S,   KC_D,   KC_F,    KC_G,                KC_H,         KC_J,    KC_K,   KC_L,   KC_SCLN,KC_QUOT, \
       KC_LSFT,KC_Z,   KC_X,   KC_C,   KC_V,    KC_B, TO(1), S(KC_0),KC_N,         KC_M,    KC_COMM,KC_DOT, KC_SLSH,KC_NUHS, \
-      KC_LCTL,S(KC_V),KC_LALT,KC_LGUI,KC_LANG2,MO(2),KC_BSPC,KC_ENT,SFT_T(KC_SPC),KC_LANG1,KC_JYEN,KC_LBRC,KC_RBRC,KC_RO \
+      KC_LCTL,KC_LALT,KC_LGUI,S(KC_V),KC_LANG2,MO(2),KC_BSPC,KC_ENT,SFT_T(KC_SPC),KC_LANG1,KC_JYEN,KC_LBRC,KC_RBRC,KC_RO \
       ),
 
   /* Numpad
    * ,-----------------------------------------.             ,-----------------------------------------.
-   * |Spece |      |      |   <  |   >  |   ?  |             |   /  |   .  |   =  |   /  |   *  |      |
+   * |      |      |      |   <  |   >  |   ?  |             |   /  |   .  |   =  |   /  |   *  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * | Esc  |   !  |   "  |   [  |   ]  |   '  |             |   *  |   7  |   8  |   9  |   -  |      |
+   * |      |   !  |   "  |   [  |   ]  |   '  |             |   *  |   7  |   8  |   9  |   -  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * | Tab  |   #  |   $  |   (  |   )  |   ~  |             |   -  |   4  |   5  |   6  |   +  |      |
+   * |      |   #  |   $  |   (  |   )  |   ~  |             |   -  |   4  |   5  |   6  |   +  |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * | Shift|   %  |   &  |   {  |   }  |   |  |TO(Nu)| NLCK |   +  |   1  |   2  |   3  | Ent  |      |
+   * |      |   %  |   &  |   {  |   }  |   |  |TO(Nu)| NLCK |   +  |   1  |   2  |   3  | Ent  |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * | Ctrl |      | Alt  | GUI  |LANG2 |MO(Fn)| Bksp | Ent  |SandS |   0  |   0  |   .  | Ent  |      |
+   * |      |      |      |      |LANG2 |MO(Fn)| Bksp | Ent  |SandS |   0  |   0  |   .  | Ent  |      |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_NUMPAD] = LAYOUT( \
       _______,_______,_______,KC_LABK,KC_RABK,KC_QUES,                   KC_PSLS, KC_PDOT,KC_PEQL,KC_PSLS,KC_PAST,_______, \
-      _______,KC_EXLM,KC_AT,  KC_RBRC,KC_NUHS,KC_AMPR,                   KC_PAST,   KC_P7,KC_P8,  KC_P9,  KC_PMNS,_______, \
-      _______,KC_HASH,KC_DLR, KC_ASTR,KC_LPRN,KC_TILD,                   KC_PMNS,   KC_P4,KC_P5,  KC_P6,  KC_PPLS,_______, \
-      _______,KC_PERC,KC_CIRC,KC_RCBR,KC_PIPE,S(KC_JYEN),_______,KC_NLCK,KC_PPLS,   KC_P1,KC_P2,  KC_P3,  KC_PENT,_______, \
+      _______,S(KC_1),S(KC_2),KC_RBRC,KC_NUHS,S(KC_7),                   KC_PAST,   KC_P7,KC_P8,  KC_P9,  KC_PMNS,_______, \
+      _______,S(KC_3),S(KC_4),S(KC_8),S(KC_9),KC_PLUS,                   KC_PMNS,   KC_P4,KC_P5,  KC_P6,  KC_PPLS,_______, \
+      _______,S(KC_5),S(KC_6),KC_RCBR,KC_PIPE,S(KC_JYEN),_______,KC_NLCK,KC_PPLS,   KC_P1,KC_P2,  KC_P3,  KC_PENT,_______, \
       _______,_______,_______,_______,_______,_______,KC_BSPC,KC_PENT,SFT_T(KC_SPC),KC_P0,KC_P0,  KC_PDOT,KC_PENT,_______ \
       ),
 
@@ -99,21 +99,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------.             ,-----------------------------------------.
    * | CAPS |  F1  |  F2  |  F3  |  F4  |  F5  |             |  F6  |  F7  |  F8  |  F9  | F10  | F11  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |GA+Esc|      |      |  Up  |      |CA+Del|             |      | Home |  Up  | PgUp | PSCR | F12  |
+   * |GA+Esc|      |      |  Up  |      |CA+Del|             | VoUp | Home |  Up  | PgUp | PSCR | F12  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * | Tab  |      |  Lt  |  Dn  |  Rt  | S(^) |             |  Lt  |  Lt  |  Dn  |  Rt  |      | F13  |
+   * |      |      |  Lt  |  Dn  |  Rt  | S(^) |             | VoDn |  Lt  |  Dn  |  Rt  |      | F13  |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * | Shift|      |      |  Dn  |      |TO(Qw)|Enter |   `  |      | End  |  Dn  | PgDn |      | F14  |
+   * |      |      |      |  Dn  |      |TO(Qw)|Enter |   `  | Mute | End  |  Dn  | PgDn |      | F14  |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * | Ctrl |      | Alt  | GUI  |LANG2 |MO(Fn)| Del  |Enter |Shift |LANG1 |      |      |      | F15  |
+   * |      |      |      |      |LANG2 |MO(Fn)| Del  |Enter |Shift |LANG1 |      |      |      | F15  |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_FUNCTION] = LAYOUT( \
-      KC_CAPS,KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,                KC_F6,  KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, \
-      G(A(KC_ESC)),_______,_______,KC_UP,_______,LCA(KC_DEL),       _______,KC_HOME,KC_UP,  KC_PGUP,KC_PSCR,KC_F12, \
-      _______,_______,KC_LEFT,KC_DOWN,KC_RGHT,S(KC_EQL),            KC_LEFT,KC_LEFT,KC_DOWN,KC_RGHT,_______,KC_F13, \
-      _______,_______,_______,KC_DOWN,_______,TO(0),  KC_ENT,KC_GRV,_______,KC_END, KC_DOWN,KC_PGDN,_______,KC_F14 , \
-      _______,_______,_______,_______,_______,_______,KC_DEL,KC_ENT,_______,_______,_______,_______,_______,KC_F15 \
+      KC_CAPS,KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,                KC_F6,      KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, \
+      G(A(KC_ESC)),_______,_______,KC_UP,_______,LCA(KC_DEL),       KC__VOLUP,  KC_HOME,KC_UP,  KC_PGUP,KC_PSCR,KC_F12, \
+      _______,_______,KC_LEFT,KC_DOWN,KC_RGHT,S(KC_EQL),            KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,_______,KC_F13, \
+      _______,_______,_______,KC_DOWN,_______,TO(0),  KC_ENT,KC_GRV,KC__MUTE,   KC_END, KC_DOWN,KC_PGDN,_______,KC_F14 , \
+      _______,_______,_______,_______,_______,_______,KC_DEL,KC_ENT,_______,    _______,_______,_______,_______,KC_F15 \
       ),
 };
 
