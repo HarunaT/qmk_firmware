@@ -21,6 +21,16 @@
 #include "util.h"
 #include <string.h>
 
+#ifdef RING_BUFFERED_6KRO_REPORT_ENABLE
+#    define RO_ADD(a, b) ((a + b) % KEYBOARD_REPORT_KEYS)
+#    define RO_SUB(a, b) ((a - b + KEYBOARD_REPORT_KEYS) % KEYBOARD_REPORT_KEYS)
+#    define RO_INC(a)    RO_ADD(a, 1)
+#    define RO_DEC(a)    RO_SUB(a, 1)
+static int8_t cb_head  = 0;
+static int8_t cb_tail  = 0;
+static int8_t cb_count = 0;
+#endif
+
 /** \brief has_anykey
  *
  * FIXME: Needs doc
@@ -54,7 +64,7 @@ uint8_t get_first_key(report_keyboard_t* keyboard_report) {
         return i << 3 | biton(keyboard_report->nkro.bits[i]);
     }
 #endif
-#ifdef USB_6KRO_ENABLE
+#ifdef RING_BUFFERED_6KRO_REPORT_ENABLE
     uint8_t i = cb_head;
     do {
         if (keyboard_report->keys[i] != 0) {
@@ -68,12 +78,38 @@ uint8_t get_first_key(report_keyboard_t* keyboard_report) {
 #endif
 }
 
+/** \brief Checks if a key is pressed in the report
+ *
+ * Returns true if the keyboard_report reports that the key is pressed, otherwise false
+ * Note: The function doesn't support modifers currently, and it returns false for KC_NO
+ */
+bool is_key_pressed(report_keyboard_t* keyboard_report, uint8_t key) {
+    if (key == KC_NO) {
+        return false;
+    }
+#ifdef NKRO_ENABLE
+    if (keyboard_protocol && keymap_config.nkro) {
+        if ((key >> 3) < KEYBOARD_REPORT_BITS) {
+            return keyboard_report->nkro.bits[key >> 3] & 1 << (key & 7);
+        } else {
+            return false;
+        }
+    }
+#endif
+    for (int i = 0; i < KEYBOARD_REPORT_KEYS; i++) {
+        if (keyboard_report->keys[i] == key) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /** \brief add key byte
  *
  * FIXME: Needs doc
  */
 void add_key_byte(report_keyboard_t* keyboard_report, uint8_t code) {
-#ifdef USB_6KRO_ENABLE
+#ifdef RING_BUFFERED_6KRO_REPORT_ENABLE
     int8_t i     = cb_head;
     int8_t empty = -1;
     if (cb_count) {
@@ -140,7 +176,7 @@ void add_key_byte(report_keyboard_t* keyboard_report, uint8_t code) {
  * FIXME: Needs doc
  */
 void del_key_byte(report_keyboard_t* keyboard_report, uint8_t code) {
-#ifdef USB_6KRO_ENABLE
+#ifdef RING_BUFFERED_6KRO_REPORT_ENABLE
     uint8_t i = cb_head;
     if (cb_count) {
         do {
