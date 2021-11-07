@@ -30,7 +30,7 @@
 
 static uint8_t ng_chrcount = 0; // 文字キー入力のカウンタ
 static bool is_naginata = false; // 薙刀式がオンかオフか
-static uint8_t naginata_layer = 0; // NG_*を配置しているレイヤー番号
+static uint8_t naginata_layer = 1; // NG_*を配置しているレイヤー番号
 static uint32_t keycomb = 0UL; // 同時押しの状態を示す。32bitの各ビットがキーに対応する。
 static uint16_t ngon_keys[2]; // 薙刀式をオンにするキー(通常HJ)
 static uint16_t ngoff_keys[2]; // 薙刀式をオフにするキー(通常FG)
@@ -336,10 +336,10 @@ const PROGMEM naginata_keymap ngmap[] = {
 
   // 追加
   {.key = B_SHFT            , .kana = " "},
-  {.key = B_Q               , .kana = ""},
+  {.key = B_Q               , .kana = "wye"}, // 「ゑ」に設定
   {.key = B_V|B_SHFT        , .kana = ","},
   {.key = B_M|B_SHFT        , .kana = "."SS_TAP(X_ENTER)},
-  {.key = B_U               , .kana = SS_TAP(X_BSPACE)},
+  {.key = B_U               , .kana = "wyi"}, // 「ゐ」に設定　
 
   // enter
   {.key = B_V|B_M           , .kana = SS_TAP(X_ENTER)},
@@ -433,16 +433,16 @@ static naginata_keymap_long ngmapl_ty[12];
 
 const PROGMEM naginata_keymap_long ngmapl_mac[] = {
 // 編集モード Mac
-  {.key = B_J|B_K|B_Q		, .kana = SS_LCMD(SS_LCTL("e"))}, // ^{End}
+  {.key = B_J|B_K|B_Q		, .kana = SS_LCMD(SS_TAP(X_END))}, // ^{End}
   {.key = B_J|B_K|B_R		, .kana = SS_LCMD("s")}, // ^s
-  {.key = B_D|B_F|B_Y		, .kana = SS_LCTL("a")}, // {Home}
-  {.key = B_D|B_F|B_U		, .kana = SS_LSFT(SS_LCTL("e"))SS_TAP(X_BSPACE)}, // +{End}{BS}
+  {.key = B_D|B_F|B_Y		, .kana = SS_TAP(X_HOME)}, // {Home}
+  {.key = B_D|B_F|B_U		, .kana = SS_LSFT(SS_TAP(X_END))SS_TAP(X_BSPACE)}, // +{End}{BS}
   {.key = B_D|B_F|B_SCLN		, .kana = SS_LCTL("k")}, // ^i
-  {.key = B_D|B_F|B_N		, .kana = SS_LCTL("e")}, // {End}
+  {.key = B_D|B_F|B_N		, .kana = SS_TAP(X_END)}, // {End}
   {.key = B_D|B_F|B_SLSH		, .kana = SS_LCTL("j")}, // ^u
-  {.key = B_M|B_COMM|B_E		, .kana = SS_LCTL("a")SS_TAP(X_ENTER)SS_TAP(X_SPACE)SS_TAP(X_SPACE)SS_TAP(X_SPACE)SS_LCTL("e")}, // {Home}{改行}{Space 3}{End}
-  {.key = B_M|B_COMM|B_R		, .kana = SS_LCTL("a")SS_TAP(X_ENTER)SS_TAP(X_SPACE)SS_LCTL("e")}, // {Home}{改行}{Space 1}{End}
-  {.key = B_C|B_V|B_Y		, .kana = SS_LSFT(SS_LCTL("a"))}, // +{Home}
+  {.key = B_M|B_COMM|B_E		, .kana = SS_TAP(X_HOME)SS_TAP(X_ENTER)SS_TAP(X_SPACE)SS_TAP(X_SPACE)SS_TAP(X_SPACE)SS_TAP(X_END)}, // {Home}{改行}{Space 3}{End}
+  {.key = B_M|B_COMM|B_R		, .kana = SS_TAP(X_HOME)SS_TAP(X_ENTER)SS_TAP(X_SPACE)SS_TAP(X_END)}, // {Home}{改行}{Space 1}{End}
+  {.key = B_C|B_V|B_Y		, .kana = SS_LSFT(SS_TAP(X_HOME))}, // +{Home}
   {.key = B_C|B_V|B_U		, .kana = SS_LCMD("x")}, // ^x
   {.key = B_C|B_V|B_I		, .kana = SS_LCMD("v")}, // ^v
   {.key = B_C|B_V|B_O		, .kana = SS_LCMD("y")}, // ^y
@@ -450,7 +450,7 @@ const PROGMEM naginata_keymap_long ngmapl_mac[] = {
   {.key = B_C|B_V|B_H		, .kana = SS_LCMD("c")}, // ^c
   {.key = B_C|B_V|B_L		, .kana = SS_TAP(X_PGUP)}, // ^{PgUp}
   {.key = B_C|B_V|B_SCLN		, .kana = SS_TAP(X_PGUP)SS_TAP(X_PGUP)SS_TAP(X_PGUP)SS_TAP(X_PGUP)SS_TAP(X_PGUP)}, // ^{PgUp 5}
-  {.key = B_C|B_V|B_N		, .kana = SS_LSFT(SS_LCTL("e"))}, // +{End}
+  {.key = B_C|B_V|B_N		, .kana = SS_LSFT(SS_TAP(X_END))}, // +{End}
   {.key = B_C|B_V|B_DOT		, .kana = SS_TAP(X_PGDOWN)}, // ^{PgDn}
   {.key = B_C|B_V|B_SLSH		, .kana = SS_TAP(X_PGDOWN)SS_TAP(X_PGDOWN)SS_TAP(X_PGDOWN)SS_TAP(X_PGDOWN)SS_TAP(X_PGDOWN)}, // ^{PgDn 5}
 };
@@ -648,7 +648,9 @@ void ng_show_os(void) {
 
 void mac_send_string(const char *str) {
   send_string(str);
+  if (!naginata_config.live_conv) tap_code(KC_LANG1); //ATOK対応のため追加
   if (!naginata_config.live_conv) tap_code(KC_SPC);
+  tap_code(KC_LANG1); //ATOK対応のため追加
   tap_code(KC_ENT);
 }
 

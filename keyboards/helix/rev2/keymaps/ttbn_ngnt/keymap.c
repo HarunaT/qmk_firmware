@@ -51,7 +51,7 @@ enum custom_keycodes {
 
 //key name aliases
 #define SANDS SFT_T(KC_SPC)
-#define EISU LT(_FUNCTION,KC_LANG2) //單打で英數、保持で機能面へ。
+#define EISU LT(_FUNCTION,KC_NO) //單打で英數、保持で機能面へ。
 #define KANA KC_LANG1
 
 /*
@@ -123,21 +123,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------.             ,-----------------------------------------.
    * | CAPS |  F1  |  F2  |  F3  |  F4  |  F5  |             |  F6  |  F7  |  F8  |  F9  | F10  | F11  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |GA+Esc|NG_WIN|      |  Up  |      |CA+Del|             | VoUp | Home |  Up  | PgUp | PSCR | F12  |
+   * |GA+Esc|NG_WIN|      |  Up  |      |CA+Del|             | VoUp | Home |  Up  | PgUp | TAYO | F12  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |  MLV |NG_MAC|  Lt  |  Dn  |  Rt  | S(^) |             | VoDn |  Lt  |  Dn  |  Rt  |      | F13  |
+   * |      |NG_MAC|  Lt  |  Dn  |  Rt  | S(^) |             | VoDn |  Lt  |  Dn  |  Rt  | MLV  | F13  |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * | TAYO |NG_OS?|      |  Dn  |TO(Qw)|      |Enter |   `  | Mute | End  |  Dn  | PgDn |      | F14  |
+   * |      |NG_OS?|      |  Dn  |TO(Qw)|      |Enter |   `  | Mute | End  |  Dn  | PgDn | KOTI | F14  |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |      |      |      |      | Del  |Enter |      |      |      |      |      | F15  |
+   * |      |      |      |      |      |Shift | Del  |Enter |Shift |      |      |      | PSCR | F15  |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_FUNCTION] = LAYOUT( \
-      KC_CAPS,    KC_F1,   KC_F2,  KC_F3,  KC_F4,  KC_F5,             KC_F6,      KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, \
-      LAG(KC_ESC),NGSW_WIN,_______,KC_UP,  _______,LCA(KC_DEL),       KC__VOLUP,  KC_HOME,KC_UP,  KC_PGUP,KC_PSCR,KC_F12, \
-      NG_MLV,     NGSW_MAC,KC_LEFT,KC_DOWN,KC_RGHT,S(KC_EQL),         KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,_______,KC_F13, \
-      NG_TAYO,    NG_SHOS, _______,KC_DOWN,TO(0),  _______,KC_ENT,KC_GRV,KC__MUTE,KC_END, KC_DOWN,KC_PGDN,_______,KC_F14, \
-      _______,    _______, _______,_______,_______,_______,KC_DEL,KC_ENT, _______,_______,_______,_______,_______,KC_F15 \
+      KC_CAPS,    KC_F1,   KC_F2,  KC_F3,  KC_F4,  KC_F5,                KC_F6,      KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, \
+      LAG(KC_ESC),NGSW_WIN,_______,KC_UP,  _______,LCA(KC_DEL),          KC__VOLUP,  KC_HOME,KC_UP,  KC_PGUP,NG_TAYO,KC_F12, \
+      _______,    NGSW_MAC,KC_LEFT,KC_DOWN,KC_RGHT,S(KC_EQL),            KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,NG_MLV ,KC_F13, \
+      _______,    NG_SHOS, _______,KC_DOWN,TO(0),  _______,   KC_ENT,KC_GRV,KC__MUTE,KC_END, KC_DOWN,KC_PGDN,NG_KOTI,KC_F14, \
+      _______,    _______, _______,_______,_______,KC_LSHIFT,KC_DEL,KC_ENT,KC_RSHIFT,_______,_______,_______,KC_PSCR,KC_F15 \
       ),
 };
 
@@ -180,10 +180,14 @@ void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    /* / 薙刀式
-    case KC_LANG2:
-      if (record->event.pressed) {
+     // 薙刀式
+    case EISU:
+      if (record->tap.count && record->event.pressed) {  //單打の擧動を設定
         naginata_off();
+      } else if (record->event.pressed) {  //保持時の擧動を設定
+        layer_on(_FUNCTION);
+      } else {  //離した時の擧動を設定
+        layer_off(_FUNCTION);
       }
       return false;
       break;
@@ -193,7 +197,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-      // 薙刀式 */
+      // 薙刀式 
   }
 
   // 薙刀式

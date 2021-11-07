@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 // place overrides here
-#define TAPPING_TERM 300
+#define TAPPING_TERM 200
 #define SSD1306OLED
 #define MASTER_RIGHT
 // If you need more program area, try select and reduce rgblight modes to use.
@@ -52,7 +52,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define NAGINATA_EDIT_MAC // US101
 // Macはunicode入力を使わない
 #define MAC_LIVE_CONVERSION // Macでライブ変換をオンにしている場合
-
+#define PERMISSIVE_HOLD
 // #define NAGINATA_EDIT_LINUX
 // #define UNICODE_SELECTED_MODES UC_LNX
 
