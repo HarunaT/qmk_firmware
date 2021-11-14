@@ -24,6 +24,6 @@ include $(strip $(KEYBOARD_LOCAL_FEATURES_MK))
 
 # 薙刀式の爲追記
 UNICODE_ENABLE = yes
-SRC +=    naginata_v13u.c
+SRC +=    naginata_v14t.c
 EXTRAFLAGS += -flto
 # 薙刀式の爲追記、此處迄
