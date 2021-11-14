@@ -1152,13 +1152,6 @@ bool naginata_lookup(int nt, bool shifted) {
           send_string(SS_LCTL(SS_TAP(X_V)));
           ng_send_unicode_string(")");
           ng_spacecopy();
-          /*
-          if (naginata_config.tategaki) {
-            send_string(" "SS_LSFT(SS_TAP(X_UP))SS_LCTL("x"));
-          } else {
-            send_string(" "SS_LSFT(SS_TAP(X_LEFT))SS_LCTL("x"));
-          }
-          */
           compress_buffer(nt);
           return true;
           break;
@@ -1168,13 +1161,6 @@ bool naginata_lookup(int nt, bool shifted) {
           send_string(SS_LCMD("v"));
           mac_send_string("nagikakkomika");
           ng_spacecopy();
-          /*
-          if (naginata_config.tategaki) {
-            send_string(" "SS_LSFT(SS_TAP(X_UP))SS_LCMD("x"));
-          } else {
-            send_string(" "SS_LSFT(SS_TAP(X_LEFT))SS_LCMD("x"));
-          }
-          */
           compress_buffer(nt);
           return true;
           break;
@@ -1189,13 +1175,6 @@ bool naginata_lookup(int nt, bool shifted) {
           send_string(SS_LCTL("v"));
           ng_send_unicode_string("」");
           ng_spacecopy();
-          /*
-          if (naginata_config.tategaki) {
-            send_string(" "SS_LSFT(SS_TAP(X_UP))SS_LCTL("x"));
-          } else {
-            send_string(" "SS_LSFT(SS_TAP(X_LEFT))SS_LCTL("x"));
-          }
-          */
           compress_buffer(nt);
           return true;
           break;
@@ -1205,13 +1184,6 @@ bool naginata_lookup(int nt, bool shifted) {
           send_string(SS_LCMD("v"));
           mac_send_string("nagikakkomiu");
           ng_spacecopy();
-          /*
-          if (naginata_config.tategaki) {
-            send_string(" "SS_LSFT(SS_TAP(X_UP))SS_LCMD("x"));
-          } else {
-            send_string(" "SS_LSFT(SS_TAP(X_LEFT))SS_LCMD("x"));
-          }
-          */
           compress_buffer(nt);
           return true;
           break;
