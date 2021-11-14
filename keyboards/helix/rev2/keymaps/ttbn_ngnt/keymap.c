@@ -167,6 +167,7 @@ void persistent_default_layer_set(uint16_t default_layer) {
 }
 
 // Setting ADJUST layer RGB back to default
+/*
 void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
   if (IS_LAYER_ON(layer1) && IS_LAYER_ON(layer2)) {
     #ifdef RGBLIGHT_ENABLE
@@ -177,6 +178,7 @@ void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
     layer_off(layer3);
   }
 }
+*/
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -253,9 +255,9 @@ void matrix_init_user(void) {
     //#ifdef AUDIO_ENABLE
     //    startup_user();
     //#endif
-    #ifdef RGBLIGHT_ENABLE
-      RGB_current_mode = rgblight_config.mode;
-    #endif
+    //#ifdef RGBLIGHT_ENABLE
+    //  RGB_current_mode = rgblight_config.mode;
+    //#endif
     //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
     #ifdef SSD1306OLED
     //    iota_gfx_init(!has_usb());   // turns on the display
