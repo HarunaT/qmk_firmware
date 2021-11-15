@@ -26,4 +26,6 @@ include $(strip $(KEYBOARD_LOCAL_FEATURES_MK))
 UNICODE_ENABLE = yes
 SRC +=    naginata_v14t.c
 EXTRAFLAGS += -flto
+SPACE_CADET_ENABLE = no
+#NO_USB_STARTUP_CHECK = yes
 # 薙刀式の爲追記、此處迄
