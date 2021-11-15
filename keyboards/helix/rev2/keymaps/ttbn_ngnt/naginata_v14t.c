@@ -356,7 +356,7 @@ const PROGMEM naginata_keymap_long ngmapl[] = {
 //{.key = B_J|B_K|B_Z		, .win   = "││",		.mac = "nagitatesenni"}, // ││{改行}
   // {.key = B_J|B_K|B_X		, .kana = ""}, // 【】{改行}{↑}
   {.key = B_J|B_K|B_C		, .kana = "!"SS_TAP(X_ENTER)}, // ！{改行}
-  {.key = B_J|B_K|B_V		, .kana = SS_TAP(X_ENTER)SS_TAP(NGDN)}, // {改行}{↓}
+//{.key = B_J|B_K|B_V		, .kana = SS_TAP(X_ENTER) SS_TAP(NGDN)}, // {改行}{↓}
   // {.key = B_J|B_K|B_B		, .kana = ""}, // 《》{改行}{↑}
   {.key = B_D|B_F|B_Y		, .kana = SS_TAP(X_HOME)}, // {Home}
   {.key = B_D|B_F|B_U		, .kana = SS_LSFT(SS_TAP(X_END))SS_TAP(X_BSPACE)}, // +{End}{BS}
@@ -425,9 +425,10 @@ const PROGMEM naginata_keymap_long ngmapl_tate[] = {
   {.key = B_C|B_V|B_COMM		, .kana = SS_LSFT(SS_TAP(NGLT))}, // +{←}
   {.key = B_C|B_V|B_DOT		, .kana = SS_TAP(NGLT)SS_TAP(NGLT)SS_TAP(NGLT)SS_TAP(NGLT)SS_TAP(NGLT)}, // {← 5}
   {.key = B_C|B_V|B_SLSH		, .kana = SS_LSFT(SS_TAP(NGLT)SS_TAP(NGLT)SS_TAP(NGLT)SS_TAP(NGLT)SS_TAP(NGLT))}, // +{← 5}
+  {.key = B_J|B_K|B_V		, .kana = SS_TAP(X_ENTER)SS_TAP(NGDN)}, // {改行}{↓} 
 };
 
-static naginata_keymap_long ngmapl_ty[12];
+static naginata_keymap_long ngmapl_ty[19];
 
 const PROGMEM naginata_keymap_long ngmapl_mac[] = {
 // 編集モード Mac
