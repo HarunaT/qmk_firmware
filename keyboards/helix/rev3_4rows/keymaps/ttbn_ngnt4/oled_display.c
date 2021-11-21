@@ -80,68 +80,53 @@ void render_status(void) {
       //{0x6f,0x70,0x71,0x72,0} //大
       }};
 
-  void caps_num(int gyou){
+  void layer_moji_45(int gyou){
     led_t led_state = host_keyboard_led_state();
     oled_write_P(led_state.caps_lock ? layer_moji[3][gyou] : PSTR("    "), false);
     oled_write_P(led_state.num_lock ? PSTR("    ") : layer_moji[4][gyou], false);
     }
 
-  switch (get_highest_layer(layer_state)) {
-    case _QWERTY:
-      oled_write_P(PSTR("        "), false);
-      oled_write_P(layer_moji[2][0], false);
-      caps_num(0);
-      oled_write_P(PSTR("        "), false);
-      oled_write_P(layer_moji[2][1], false);
-      caps_num(1);
-      oled_write_P(PSTR("        "), false);
-      oled_write_P(layer_moji[2][2], false);
-      caps_num(2);
-      break;
-    case _NAGINATA:
-      oled_write_P(PSTR("        "), false);
-      oled_write_P(layer_moji[2][0], true);
-      caps_num(0);
-      oled_write_P(PSTR("        "), false);
-      oled_write_P(layer_moji[2][1], true);
-      caps_num(1);
-      oled_write_P(PSTR("        "), false);
-      oled_write_P(layer_moji[2][2], true);
-      caps_num(2);
-      break;
-    case _NUMPAD:
-      oled_write_P(layer_moji[1][0], false);
-      oled_write_P(layer_moji[2][0], false);
-      caps_num(0);
-      oled_write_P(layer_moji[1][1], false);
-      oled_write_P(layer_moji[2][1], false);
-      caps_num(1);
-      oled_write_P(layer_moji[1][2], false);
-      oled_write_P(layer_moji[2][2], false);
-      caps_num(2);
-      break;
-    case _FN_LEFT:
-    case _FN_RGHT:
-      oled_write_P(layer_moji[0][0], false);
-      oled_write_P(PSTR("     "), false);
-      caps_num(0);
-      oled_write_P(layer_moji[0][1], false);
-      oled_write_P(PSTR("     "), false);
-      caps_num(1);
-      oled_write_P(layer_moji[0][2], false);
-      oled_write_P(PSTR("     "), false);
-      caps_num(2);
-      break;
-    default:
-      oled_write_P(PSTR("        "), false);
-      oled_write_P(layer_moji[2][0], false);
-      oled_write_P(PSTR("\n"), false);
-      oled_write_P(PSTR("UNDEF-  "), false);
-      oled_write_P(layer_moji[2][1], false);
-      oled_write_P(PSTR("\n"), false);
-      oled_write_P(PSTR("        "), false);
-      oled_write_P(layer_moji[2][2], false);
+  void layer_moji_12(int gyou){
+    switch (get_highest_layer(layer_state)){
+      case _QWERTY:
+      case _NAGINATA:
+        oled_write_P(PSTR("        "), false);
+        break;
+      case _NUMPAD:
+        oled_write_P(layer_moji[1][gyou], false);
+        break;
+      case _FN_LEFT:
+      case _FN_RGHT:
+        oled_write_P(layer_moji[0][gyou], false);
+        break;
+      default:
+        oled_write_P(PSTR("UNDEF-  "), false);
+    }
+  }  
+  
+  void layer_moji_3(int gyou){
+    switch (get_highest_layer(layer_state)){
+      case _NAGINATA:
+        oled_write_P(layer_moji[2][gyou], true);
+        break;
+      case _FN_LEFT:
+      case _FN_RGHT:
+        oled_write_P(PSTR("     "), false);
+        break;
+      default:
+        oled_write_P(layer_moji[2][gyou], false);
+    }
   }
+
+  void layer_moji_write(int gyou){
+    layer_moji_12(gyou);
+    layer_moji_3(gyou);
+    layer_moji_45(gyou);
+  }
+
+  layer_moji_write(1);
+  layer_moji_write(2);
+  layer_moji_write(3);
 }
 
 static void render_logo(void) {
