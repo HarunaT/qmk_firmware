@@ -46,13 +46,15 @@ enum layer_number {
 enum custom_keycodes {
   SANDS = NG_SAFE_RANGE,
   EISU,
-  KANA
+  KANA,
+  NMPD
 };
 
 //key name aliases
 #define SANDS SFT_T(KC_SPC)
 #define EISU LT(_FUNCTION,KC_NO) //單打で英數、保持で機能面へ。
 #define KANA KC_LANG1
+//#define NMPD KC_NO
 
 /*
 enum macro_keycodes {
@@ -84,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_SPC, KC_1,   KC_2,   KC_3,   KC_4, KC_5,                 KC_6,  KC_7, KC_8,   KC_9,   KC_0,   KC_EQL, \
       KC_ESC, KC_Q,   KC_W,   KC_E,   KC_R, KC_T,                 KC_Y,  KC_U, KC_I,   KC_O,   KC_P,   KC_MINS, \
       KC_TAB, KC_A,   KC_S,   KC_D,   KC_F, KC_G,                 KC_H,  KC_J, KC_K,   KC_L,   KC_SCLN,KC_QUOT, \
-      KC_LSFT,KC_Z,   KC_X,   KC_C,   KC_V, KC_B, TO(2),  S(KC_0),KC_N,  KC_M, KC_COMM,KC_DOT, KC_SLSH,KC_NUHS, \
+      KC_LSFT,KC_Z,   KC_X,   KC_C,   KC_V, KC_B, NMPD,   S(KC_0),KC_N,  KC_M, KC_COMM,KC_DOT, KC_SLSH,KC_NUHS, \
       KC_LCTL,KC_LALT,KC_LGUI,S(KC_V),EISU, SANDS,KC_BSPC,KC_ENT, SANDS, KANA, KC_JYEN,KC_LBRC,KC_RBRC,KC_RO \
       ),
 
@@ -180,6 +182,8 @@ void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
 }
 */
 
+uint16_t NMPD_timer;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
      // 薙刀式
@@ -200,6 +204,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
       break;
       // 薙刀式 
+
+    case NMPD:
+      if(record->event.pressed){
+        NMPD_timer = timer_read();
+        layer_on(2);
+      } else {
+        layer_off(2);
+        if (timer_elapsed(NMPD_timer) < TAPPING_TERM) {  
+          layer_on(2);
+        }
+      }
+      return false;
+      break;
   }
 
   // 薙刀式
@@ -381,7 +398,7 @@ void render_status(struct CharacterMatrix *matrix) {
 
   void caps_num(int gyou){
     matrix_write_P(matrix, (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)) ? layer_moji[3][gyou] : PSTR("    "));
-    matrix_write_P(matrix, (host_keyboard_leds() & (1<<USB_LED_NUM_LOCK)) ? layer_moji[4][gyou] : PSTR("    "));
+    matrix_write_P(matrix, (host_keyboard_leds() & (1<<USB_LED_NUM_LOCK)) ? PSTR("    ") : layer_moji[4][gyou]);
     }
 
   switch (get_highest_layer(layer_state)) {
