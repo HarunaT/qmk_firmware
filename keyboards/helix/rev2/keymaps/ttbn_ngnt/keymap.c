@@ -77,17 +77,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * | Tab  |   A  |   S  |   D  |   F  |   G  |             |   H  |   J  |   K  |   L  |   ;  |  :   |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * | Shift|   Z  |   X  |   C  |   V  |   B  |TO(Nu)| S(0) |   N  |   M  |   ,  |   .  |   /  |  ]   |
+   * | Shift|   Z  |   X  |   C  |   V  |   B  | NMPD | S(0) |   N  |   M  |   ,  |   .  |   /  |  ]   |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * | Ctrl | Alt  | GUI  | S(V) |LN2/Fn|SandS | Bksp |Enter |SandS | KANA | JYEN |  @   |  [   |  _   |
+   * | Ctrl | Alt  | GUI  | NMPD |LN2/Fn|SandS | Bksp |Enter |SandS | KANA | JYEN |  @   |  [   |  _   |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_QWERTY] = LAYOUT( \
-      KC_SPC, KC_1,   KC_2,   KC_3,   KC_4, KC_5,                 KC_6,  KC_7, KC_8,   KC_9,   KC_0,   KC_EQL, \
-      KC_ESC, KC_Q,   KC_W,   KC_E,   KC_R, KC_T,                 KC_Y,  KC_U, KC_I,   KC_O,   KC_P,   KC_MINS, \
-      KC_TAB, KC_A,   KC_S,   KC_D,   KC_F, KC_G,                 KC_H,  KC_J, KC_K,   KC_L,   KC_SCLN,KC_QUOT, \
-      KC_LSFT,KC_Z,   KC_X,   KC_C,   KC_V, KC_B, NMPD,   S(KC_0),KC_N,  KC_M, KC_COMM,KC_DOT, KC_SLSH,KC_NUHS, \
-      KC_LCTL,KC_LALT,KC_LGUI,S(KC_V),EISU, SANDS,KC_BSPC,KC_ENT, SANDS, KANA, KC_JYEN,KC_LBRC,KC_RBRC,KC_RO \
+      KC_SPC, KC_1,   KC_2,   KC_3, KC_4, KC_5,                 KC_6,  KC_7, KC_8,   KC_9,   KC_0,   KC_EQL, \
+      KC_ESC, KC_Q,   KC_W,   KC_E, KC_R, KC_T,                 KC_Y,  KC_U, KC_I,   KC_O,   KC_P,   KC_MINS, \
+      KC_TAB, KC_A,   KC_S,   KC_D, KC_F, KC_G,                 KC_H,  KC_J, KC_K,   KC_L,   KC_SCLN,KC_QUOT, \
+      KC_LSFT,KC_Z,   KC_X,   KC_C, KC_V, KC_B, NMPD,   S(KC_0),KC_N,  KC_M, KC_COMM,KC_DOT, KC_SLSH,KC_NUHS, \
+      KC_LCTL,KC_LALT,KC_LGUI,NMPD, EISU, SANDS,KC_BSPC,KC_ENT, SANDS, KANA, KC_JYEN,KC_LBRC,KC_RBRC,KC_RO \
       ),
 
 // 薙刀式
@@ -102,23 +102,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Numpad
    * ,-----------------------------------------.             ,-----------------------------------------.
-   * |      |      |      |   <  |   >  |   ?  |             |   /  |   .  |   =  |   /  |   *  |      |
+   * |      |      |      |   [  |   ]  |   ?  |             |      |      |      |      |      |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |   !  |   "  |   [  |   ]  |   '  |             |   *  |   7  |   8  |   9  |   -  |      |
+   * |      |   !  |   "  |   <  |   >  |   '  |             |   *  |   7  |   8  |   9  |   ^  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |   #  |   $  |   (  |   )  |   ~  |             |   -  |   4  |   5  |   6  |   +  |      |
+   * |      |   #  |   $  |   (  |   )  |   ~  |             |   -  |   4  |   5  |   6  |   ?  |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |   %  |   &  |   {  |   }  |   |  |      | NLCK |   +  |   1  |   2  |   3  | Ent  |      |
+   * |      |   %  |   &  |   {  |   }  |   |  |      | NLCK |   +  |   1  |   2  |   3  |   /  |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |      |      |      |      |      | Ent  |      |   0  |   0  |   .  | Ent  |      |
+   * |      |      |      |      |      |      |      | Ent  |      |   0  |   0  |   .  |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_NUMPAD] = LAYOUT( \
-      _______,_______,_______,KC_LABK,KC_RABK,KC_QUES,                   KC_PSLS, KC_PDOT,KC_PEQL,KC_PSLS,KC_PAST,_______, \
-      _______,S(KC_1),S(KC_2),KC_RBRC,KC_NUHS,S(KC_7),                   KC_PAST,   KC_P7,KC_P8,  KC_P9,  KC_PMNS,_______, \
-      _______,S(KC_3),S(KC_4),S(KC_8),S(KC_9),KC_PLUS,                   KC_PMNS,   KC_P4,KC_P5,  KC_P6,  KC_PPLS,_______, \
-      _______,S(KC_5),S(KC_6),KC_RCBR,KC_PIPE,S(KC_JYEN),_______,KC_NLCK,KC_PPLS,   KC_P1,KC_P2,  KC_P3,  KC_PENT,_______, \
-      _______,_______,_______,_______,_______,_______,   _______,KC_PENT,_______,   KC_P0,KC_P0,  KC_PDOT,KC_PENT,_______ \
+      _______,_______,_______,KC_RBRC,KC_NUHS,KC_QUES,                   _______,_______,_______,_______,_______,_______, \
+      _______,S(KC_1),S(KC_2),KC_LABK,KC_RABK,S(KC_7),                   KC_PAST,  KC_P7,  KC_P8,  KC_P9, KC_EQL,KC_NLCK, \
+      _______,S(KC_3),S(KC_4),S(KC_8),S(KC_9),KC_PLUS,                   KC_PMNS,  KC_P4,  KC_P5,  KC_P6,KC_QUES,_______, \
+      _______,S(KC_5),S(KC_6),KC_RCBR,KC_PIPE,S(KC_JYEN),_______,KC_NLCK,KC_PPLS,  KC_P1,  KC_P2,  KC_P3,KC_PSLS,_______, \
+      _______,_______,_______,_______,_______,_______,   _______,KC_PENT,_______,  KC_P0,  KC_P0,KC_PDOT,_______,_______ \
       ),
 
   /* Function
@@ -129,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * |      |NG_MAC|  Lt  |  Dn  |  Rt  | S(^) |             | VoDn |  Lt  |  Dn  |  Rt  | MLV  | F13  |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |NG_OS?|      |  Dn  |TO(Qw)|      |Enter |   `  | Mute | End  |  Dn  | PgDn | KOTI | F14  |
+   * |      |NG_OS?|      |  Dn  |TO(Qw)|Enter |Enter |   `  | Mute | End  |  Dn  | PgDn | KOTI | F14  |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
    * |      |      |      |      |      |Shift | Del  |Enter |Shift |      |      |      | PSCR | F15  |
    * `-------------------------------------------------------------------------------------------------'
@@ -138,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_CAPS,    KC_F1,   KC_F2,  KC_F3,  KC_F4,  KC_F5,                KC_F6,      KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, \
       LAG(KC_ESC),NGSW_WIN,_______,KC_UP,  _______,LCA(KC_DEL),          KC__VOLUP,  KC_HOME,KC_UP,  KC_PGUP,NG_TAYO,KC_F12, \
       _______,    NGSW_MAC,KC_LEFT,KC_DOWN,KC_RGHT,S(KC_EQL),            KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,NG_MLV ,KC_F13, \
-      _______,    NG_SHOS, _______,KC_DOWN,TO(0),  _______,   KC_ENT,KC_GRV,KC__MUTE,KC_END, KC_DOWN,KC_PGDN,NG_KOTI,KC_F14, \
+      _______,    NG_SHOS, _______,KC_DOWN,TO(0),  KC_ENT,   KC_ENT,KC_GRV,KC__MUTE,KC_END, KC_DOWN,KC_PGDN,NG_KOTI,KC_F14, \
       _______,    _______, _______,_______,_______,KC_LSHIFT,KC_DEL,KC_ENT,KC_RSHIFT,_______,_______,_______,KC_PSCR,KC_F15 \
       ),
 };
