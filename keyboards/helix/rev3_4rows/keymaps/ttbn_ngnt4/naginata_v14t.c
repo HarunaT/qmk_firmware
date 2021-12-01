@@ -329,7 +329,7 @@ const PROGMEM naginata_keymap ngmap[] = {
   // 追加
   {.key = B_SHFT            , .kana = " "},
   {.key = B_Q               , .kana = "wye"}, // 「ゑ」に設定
-  {.key = B_V|B_SHFT        , .kana = ","},
+  {.key = B_V|B_SHFT        , .kana = ","SS_TAP(X_ENTER)},
   {.key = B_M|B_SHFT        , .kana = "."SS_TAP(X_ENTER)},
   {.key = B_U               , .kana = "wyi"}, // 「ゐ」に設定　
 
@@ -381,11 +381,11 @@ const PROGMEM naginata_keymap_long ngmapl[] = {
 //{.key = B_M|B_COMM|B_T		, .win   = "〇",		.mac = "nagimaru"}, // 〇{改行}
   {.key = B_M|B_COMM|B_A		, .kana = SS_LSFT(SS_TAP(X_PGUP))}, // +{PgUp}
   // {.key = B_M|B_COMM|B_S		, .kana = ""}, // ^x(^v){改行}{Space}+{↑}^x
-  {.key = B_M|B_COMM|B_D		, .kana = SS_TAP(X_SPACE)SS_TAP(X_SPACE)SS_TAP(X_SPACE)}, // {Space 3}
+  // {.key = B_M|B_COMM|B_D		, .kana = SS_TAP(X_SPACE)SS_TAP(X_SPACE)SS_TAP(X_SPACE)}, // {Space 3}
   // {.key = B_M|B_COMM|B_F		, .kana = ""}, // ^x「^v」{改行}{Space}+{↑}^x
 //{.key = B_M|B_COMM|B_G		, .win   = "／",		.mac = "naginaname"}, // ／{改行}
   {.key = B_M|B_COMM|B_Z		, .kana = SS_LSFT(SS_TAP(X_PGDOWN))}, // +{PgDn}
-  {.key = B_M|B_COMM|B_X		, .kana = SS_LCTL("x")SS_TAP(X_BSPACE)SS_TAP(X_DELETE)SS_LCTL("v")}, // ^x{BS}{Del}^v
+  {.key = B_M|B_COMM|B_D		, .kana = SS_LCTL("x")SS_TAP(X_BSPACE)SS_TAP(X_DELETE)SS_LCTL("v")}, // ^x{BS}{Del}^v M,X→M,Dに變更
   {.key = B_M|B_COMM|B_C		, .kana = SS_TAP(X_HOME)SS_TAP(X_BSPACE)SS_TAP(X_DELETE)SS_TAP(X_DELETE)SS_TAP(X_DELETE)SS_TAP(X_END)}, // {Home}{BS}{Del 3}{End}
   {.key = B_M|B_COMM|B_V		, .kana = SS_TAP(X_HOME)SS_TAP(X_BSPACE)SS_TAP(X_DELETE)SS_TAP(X_END)}, // {Home}{BS}{Del 1}{End}
 //{.key = B_M|B_COMM|B_B		, .macro , // ｜{改行}{End}《》{改行}{↑}
@@ -440,7 +440,7 @@ const PROGMEM naginata_keymap_long ngmapl_mac[] = {
   {.key = B_D|B_F|B_N		, .kana = SS_TAP(X_END)}, // {End}
   {.key = B_M|B_COMM|B_E		, .kana = SS_TAP(X_HOME)SS_TAP(X_ENTER)SS_TAP(X_SPACE)SS_TAP(X_SPACE)SS_TAP(X_SPACE)SS_TAP(X_END)}, // {Home}{改行}{Space 3}{End}
   {.key = B_M|B_COMM|B_R		, .kana = SS_TAP(X_HOME)SS_TAP(X_ENTER)SS_TAP(X_SPACE)SS_TAP(X_END)}, // {Home}{改行}{Space 1}{End}
-  {.key = B_M|B_COMM|B_X		, .kana = SS_LCMD("x")SS_TAP(X_BSPACE)SS_TAP(X_DELETE)SS_LCMD("v")}, // ^x{BS}{Del}^v
+  {.key = B_M|B_COMM|B_D		, .kana = SS_LCMD("x")SS_TAP(X_BSPACE)SS_TAP(X_DELETE)SS_LCMD("v")}, // ^x{BS}{Del}^v M,X→M,Dに變更
   {.key = B_C|B_V|B_Y		, .kana = SS_LSFT(SS_TAP(X_HOME))}, // +{Home}
   {.key = B_C|B_V|B_U		, .kana = SS_LCMD("x")}, // ^x
   {.key = B_C|B_V|B_I		, .kana = SS_LCMD("v")}, // ^v
@@ -1215,6 +1215,30 @@ bool naginata_lookup(int nt, bool shifted) {
       }
       break;
       
+    case B_M|B_COMM|B_X: // ^x【^v】{改行}{Space}+{↑}^x
+      switch (naginata_config.os) {
+        case NG_WIN:
+        case NG_LINUX:
+          send_string(SS_LCTL("x"));
+          ng_send_unicode_string("【");
+          send_string(SS_LCTL("v"));
+          ng_send_unicode_string("】");
+          ng_spacecopy();
+          compress_buffer(nt);
+          return true;
+          break;
+        case NG_MAC:
+          send_string(SS_LCMD("x"));
+          mac_send_string("nagikakkohia");
+          send_string(SS_LCMD("v"));
+          mac_send_string("nagikakkomia");
+          ng_spacecopy();
+          compress_buffer(nt);
+          return true;
+          break;
+      }
+      break;
+
     default:
       // キーから仮名に変換して出力する
 

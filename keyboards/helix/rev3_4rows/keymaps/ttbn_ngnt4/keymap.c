@@ -40,7 +40,8 @@ enum custom_keycodes {
 };
 
 #define SANDS SFT_T(KC_SPC)
-
+#define EISU LT(_FN_LEFT,KC_NO) //單打で英數、保持で機能面へ。
+#define KANA LT(_FN_RGHT,KC_NO)
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Qwerty
@@ -125,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       )
 };
 
-uint8_t NMPD_timer;
+uint16_t NMPD_timer;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -142,7 +143,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case KANA:
       if (record->tap.count && record->event.pressed) {  //單打の擧動を設定
-        naginata_off();
+        naginata_on();
       } else if (record->event.pressed) {  //保持時の擧動を設定
         layer_on(_FN_RGHT);
       } else {  //離した時の擧動を設定
@@ -182,15 +183,4 @@ void matrix_init_user(void) {
   set_naginata(_NAGINATA, ngonkeys, ngoffkeys);
   // 薙刀式
   
-    //#ifdef AUDIO_ENABLE
-    //    startup_user();
-    //#endif
-    //#ifdef RGBLIGHT_ENABLE
-    //  RGB_current_mode = rgblight_config.mode;
-    //#endif
-    //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
-    #ifdef SSD1306OLED
-    //    iota_gfx_init(!has_usb());   // turns on the display
-        oled_init(true);  //trueで逆さまにする。
-    #endif
 }

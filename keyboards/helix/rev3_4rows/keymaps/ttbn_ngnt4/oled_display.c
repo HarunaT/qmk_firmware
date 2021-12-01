@@ -29,7 +29,9 @@ enum layer_names {
 
 #ifdef OLED_ENABLE
 
-void render_layer_status(void) {
+oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
+/*
+static void render_layer_status(void) {
   oled_write_P(PSTR("LAYER: "), false);
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
@@ -52,7 +54,7 @@ void render_layer_status(void) {
            
     }
 }
-
+*/
 void render_status(void) {
   static const char layer_moji[5][4][6] PROGMEM ={{
       {0x95,0x96,0x97,0x98,0},
@@ -73,7 +75,7 @@ void render_status(void) {
       },{
       {0x04,0x05,0x06,0x07,0},
       {0x08,0x09,0x0b,0x0c,0},
-      {0x0d,0x0e,0x0f,0x10,0} //編
+      {0x0e,0x0f,0x10,0x11,0} //編
       }};
 
   void render_moji_12345(int gyou){
@@ -109,7 +111,7 @@ void oled_task_user(void) {
     render_status();
   }else{
     render_logo();
-    render_layer_status();
+    //render_layer_status();
   }
 }
 
