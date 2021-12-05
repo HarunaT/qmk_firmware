@@ -91,19 +91,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Function Left (EISU)
    * ,-----------------------------------------.             ,-----------------------------------------.
-   * |GA+Esc|NG_WIN|      |  Up  |      |CA+Del|             | VoUp | Home |  Up  | PgUp | TAYO |   `  |
+   * |GA+Esc|NG_WIN|LCGNRM|  Up  |      |CA+Del|             | VoUp | Home |  Up  | PgUp | TAYO |   `  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |NG_MAC|  Lt  |  Dn  |  Rt  |      |             | VoDn |  Lt  |  Dn  |  Rt  | MLV  | CAPS |
+   * |      |NG_OS?|  Lt  |  Dn  |  Rt  |      |             | VoDn |  Lt  |  Dn  |  Rt  | MLV  | CAPS |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |NG_OS?|      |  Dn  |      |Enter |             | Mute | End  |  Dn  | PgDn | KOTI |      |
+   * |      |NG_MAC|LCGSWP|  Dn  |      |Enter |             | Mute | End  |  Dn  | PgDn | KOTI |      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
    * |      |      |      |      |      |Shift | Del  |Enter |Shift |      |      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_FN_LEFT] = LAYOUT( \
-      LAG(KC_ESC),NGSW_WIN,_______,KC_UP,  _______,LCA(KC_DEL),            KC__VOLUP,KC_HOME,KC_UP,  KC_PGUP,NG_TAYO,KC_GRV, \
-      _______,    NGSW_MAC,KC_LEFT,KC_DOWN,KC_RGHT,_______,              KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,NG_MLV, KC_CAPS, \
-      _______,    NG_SHOS, _______,KC_DOWN,_______,KC_ENT,                  KC__MUTE,KC_END, KC_DOWN,KC_PGDN,NG_KOTI,_______, \
+      LAG(KC_ESC),NGSW_WIN,LCG_NRM,KC_UP,  _______,LCA(KC_DEL),            KC__VOLUP,KC_HOME,KC_UP,  KC_PGUP,NG_TAYO,KC_GRV, \
+      _______,    NG_SHOS, KC_LEFT,KC_DOWN,KC_RGHT,_______,              KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,NG_MLV, KC_CAPS, \
+      _______,    NGSW_MAC,LCG_SWP,KC_DOWN,_______,KC_ENT,                  KC__MUTE,KC_END, KC_DOWN,KC_PGDN,NG_KOTI,_______, \
       _______,    _______, _______,_______,_______,KC_LSHIFT,KC_DEL,KC_ENT,KC_RSHIFT,XXXXXXX,_______,_______,_______,_______ \
       ),
 
@@ -184,3 +184,6 @@ void matrix_init_user(void) {
   // 薙刀式
   
 }
+
+#define SPLIT_TRANSPORT_MIRROR
+bool should_process_keypress(void){return true;}

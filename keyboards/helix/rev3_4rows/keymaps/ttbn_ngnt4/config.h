@@ -20,6 +20,7 @@
 #define TAPPING_TERM 200
 #define SSD1306OLED
 #define MASTER_RIGHT
+#define OLED_BRIGHTNESS 0
 
 // 薙刀式の爲追記
 

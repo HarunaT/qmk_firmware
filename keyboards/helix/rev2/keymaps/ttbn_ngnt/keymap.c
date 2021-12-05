@@ -136,9 +136,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_FUNCTION] = LAYOUT( \
       KC_CAPS,    KC_F1,   KC_F2,  KC_F3,  KC_F4,  KC_F5,                KC_F6,      KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, \
-      LAG(KC_ESC),NGSW_WIN,_______,KC_UP,  _______,LCA(KC_DEL),          KC__VOLUP,  KC_HOME,KC_UP,  KC_PGUP,NG_TAYO,KC_F12, \
-      _______,    NGSW_MAC,KC_LEFT,KC_DOWN,KC_RGHT,S(KC_EQL),            KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,NG_MLV ,KC_F13, \
-      _______,    NG_SHOS, _______,KC_DOWN,TO(0),  KC_ENT,   KC_ENT,KC_GRV,KC__MUTE,KC_END, KC_DOWN,KC_PGDN,NG_KOTI,KC_F14, \
+      LAG(KC_ESC),NGSW_WIN,LCG_NRM,KC_UP,  _______,LCA(KC_DEL),          KC__VOLUP,  KC_HOME,KC_UP,  KC_PGUP,NG_TAYO,KC_F12, \
+      _______,    NG_SHOS, KC_LEFT,KC_DOWN,KC_RGHT,S(KC_EQL),            KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,NG_MLV ,KC_F13, \
+      _______,    NGSW_MAC,LCG_SWP,KC_DOWN,TO(0),  KC_ENT,   KC_ENT,KC_GRV,KC__MUTE,KC_END, KC_DOWN,KC_PGDN,NG_KOTI,KC_F14, \
       _______,    _______, _______,_______,_______,KC_LSHIFT,KC_DEL,KC_ENT,KC_RSHIFT,_______,_______,_______,KC_PSCR,KC_F15 \
       ),
 };
@@ -226,40 +226,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   return true;
 }
-/*
-void keyboard_post_init_user(void) {
-  for (int i = 0; i < 6; i++) {
-    rgblight_setrgb_at(0, 0, 0, i);
-  }
-  rgblight_set();
-}
-*/
-/*
-uint32_t layer_state_set_user(uint32_t state) {
-  switch (biton32(state)) {
-    case _QWERTY:
-      for (int i = 0; i < 6; i++) {
-        setrgb(0, 0, 0, (LED_TYPE *)&led[i]);
-      }
-      rgblight_set();
-      break;
-
-    case _NUMPAD:
-      for (int i = 0; i < 6; i++) {
-        setrgb(0, 128, 0, (LED_TYPE *)&led[i]);
-      }
-      rgblight_set();
-      break;
-    case _FUNCTION:
-      for (int i = 0; i < 6; i++) {
-        setrgb(0, 0, 128,(LED_TYPE *)&led[i]);
-      }
-      rgblight_set();
-      break;
-  }
-  return state;
-}
-*/
 
 void matrix_init_user(void) {
 
@@ -282,33 +248,6 @@ void matrix_init_user(void) {
     #endif
 }
 
-
-/*
-#ifdef AUDIO_ENABLE
-
-void startup_user()
-{
-    _delay_ms(20); // gets rid of tick
-}
-
-void shutdown_user()
-{
-    _delay_ms(150);
-    stop_all_notes();
-}
-
-void music_on_user(void)
-{
-    music_scale_user();
-}
-
-void music_scale_user(void)
-{
-    PLAY_SONG(music_scale);
-}
-
-#endif
-*/
 
 //SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
 #ifdef SSD1306OLED
@@ -425,3 +364,6 @@ void iota_gfx_task_user(void) {
 }
 
 #endif
+
+#define SPLIT_TRANSPORT_MIRROR
+bool should_process_keypress(void){return true;}
