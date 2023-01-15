@@ -91,9 +91,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Function Left (EISU)
    * ,-----------------------------------------.             ,-----------------------------------------.
-   * |GA+Esc|NG_WIN|LCGNRM|  Up  |      |CA+Del|             | VoUp | Home |  Up  | PgUp | TAYO |   `  |
+   * |GA+Esc|NG_WIN|LCGNRM|  Up  | TATE |CA+Del|             | VoUp | Home |  Up  | PgUp | TAYO |   `  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |NG_OS?|  Lt  |  Dn  |  Rt  |      |             | VoDn |  Lt  |  Dn  |  Rt  | MLV  |      |
+   * |      |NG_OS?|  Lt  |  Dn  |  Rt  | YOKO |             | VoDn |  Lt  |  Dn  |  Rt  | MLV  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * |      |NG_MAC|LCGSWP|  Dn  |Enter | Del  |             | Mute | End  |  Dn  | PgDn | KOTI |      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
@@ -101,8 +101,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `-------------------------------------------------------------------------------------------------'
    */
   [_FN_LEFT] = LAYOUT( \
-      LAG(KC_ESC),NGSW_WIN,LCG_NRM,KC_UP,  _______,LCA(KC_DEL),            KC__VOLUP,KC_HOME,KC_UP,  KC_PGUP,NG_TAYO,KC_GRV, \
-      _______,    NG_SHOS, KC_LEFT,KC_DOWN,KC_RGHT,_______,              KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,NG_MLV, _______, \
+      LAG(KC_ESC),NGSW_WIN,LCG_NRM,KC_UP,  NG_TATE,LCA(KC_DEL),            KC__VOLUP,KC_HOME,KC_UP,  KC_PGUP,NG_TAYO,KC_GRV, \
+      _______,    NG_SHOS, KC_LEFT,KC_DOWN,KC_RGHT,NG_YOKO,              KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,NG_MLV, _______, \
       _______,    NGSW_MAC,LCG_SWP,KC_DOWN,KC_ENT,KC_DEL,                   KC__MUTE,KC_END, KC_DOWN,KC_PGDN,NG_KOTI,_______, \
       _______,    _______, _______,_______,_______,KC_LSHIFT,KC_DEL,KC_ENT,KC_RSHIFT,KC_CAPS,_______,_______,_______,_______ \
       ),

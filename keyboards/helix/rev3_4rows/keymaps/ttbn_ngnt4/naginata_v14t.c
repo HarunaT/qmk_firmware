@@ -563,10 +563,24 @@ char* replace(char* s, const char* before, const char* after)
 void tategaki_toggle() {
   naginata_config.tategaki ^= 1;
   eeconfig_update_user(naginata_config.raw);
-
   copyTYtable();
   copyMCtable(); //追記函數
 }
+
+void tategaki_tate() {
+  naginata_config.tategaki = 1;
+  eeconfig_update_user(naginata_config.raw);
+  copyTYtable();
+  copyMCtable(); //追記函數
+}
+
+void tategaki_yoko() {
+  naginata_config.tategaki = 0;
+  eeconfig_update_user(naginata_config.raw);
+  copyTYtable();
+  copyMCtable(); //追記函數
+}
+
 
 void copyTYtable() {
   memcpy_P(&ngmapl_ty, &ngmapl_tate, sizeof(ngmapl_ty));
@@ -814,6 +828,14 @@ bool process_naginata(uint16_t keycode, keyrecord_t *record) {
         break;
       case NG_KOTI:
         kouchi_shift_toggle();
+        return false;
+        break;
+      case NG_TATE:
+        tategaki_tate();
+        return false;
+        break;
+      case NG_YOKO:
+        tategaki_yoko();
         return false;
         break;
     }

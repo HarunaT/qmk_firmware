@@ -36,6 +36,8 @@ void kouchi_shift_toggle(void);
 void ty_send_string(char *);
 void copyTYtable(void);
 void copyMCtable(void); //追記函數
+void tategaki_tate(void);
+void tategaki_yoko(void);
 
 bool process_naginata(uint16_t, keyrecord_t *);
 // void set_naginata(uint8_t);
@@ -93,6 +95,8 @@ typedef enum naginata_keycodes {
   NG_SHOS,
   NG_TAYO,
   NG_KOTI,
+  NG_TATE,
+  NG_YOKO,
 } NGKEYS;
 
 // EEPROMに保存する設定
