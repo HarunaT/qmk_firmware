@@ -93,18 +93,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------.             ,-----------------------------------------.
    * |GA+Esc|NG_WIN|LCGNRM|  Up  |      |CA+Del|             | VoUp | Home |  Up  | PgUp | TAYO |   `  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |NG_OS?|  Lt  |  Dn  |  Rt  |      |             | VoDn |  Lt  |  Dn  |  Rt  | MLV  | CAPS |
+   * |      |NG_OS?|  Lt  |  Dn  |  Rt  |      |             | VoDn |  Lt  |  Dn  |  Rt  | MLV  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |NG_MAC|LCGSWP|  Dn  |      |Enter |             | Mute | End  |  Dn  | PgDn | KOTI |      |
+   * |      |NG_MAC|LCGSWP|  Dn  |Enter | Del  |             | Mute | End  |  Dn  | PgDn | KOTI |      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
-   * |      |      |      |      |      |Shift | Del  |Enter |Shift |      |      |      |      |      |
+   * |      |      |      |      |      |Shift | Del  |Enter |Shift | CAPS |      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_FN_LEFT] = LAYOUT( \
       LAG(KC_ESC),NGSW_WIN,LCG_NRM,KC_UP,  _______,LCA(KC_DEL),            KC__VOLUP,KC_HOME,KC_UP,  KC_PGUP,NG_TAYO,KC_GRV, \
-      _______,    NG_SHOS, KC_LEFT,KC_DOWN,KC_RGHT,_______,              KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,NG_MLV, KC_CAPS, \
-      _______,    NGSW_MAC,LCG_SWP,KC_DOWN,_______,KC_ENT,                  KC__MUTE,KC_END, KC_DOWN,KC_PGDN,NG_KOTI,_______, \
-      _______,    _______, _______,_______,_______,KC_LSHIFT,KC_DEL,KC_ENT,KC_RSHIFT,XXXXXXX,_______,_______,_______,_______ \
+      _______,    NG_SHOS, KC_LEFT,KC_DOWN,KC_RGHT,_______,              KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,NG_MLV, _______, \
+      _______,    NGSW_MAC,LCG_SWP,KC_DOWN,KC_ENT,KC_DEL,                   KC__MUTE,KC_END, KC_DOWN,KC_PGDN,NG_KOTI,_______, \
+      _______,    _______, _______,_______,_______,KC_LSHIFT,KC_DEL,KC_ENT,KC_RSHIFT,KC_CAPS,_______,_______,_______,_______ \
       ),
 
   /* Function Right (KANA)
@@ -113,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * |      |   1  |   2  |   3  |   4  |   5  |             |   6  |   7  |   8  |   9  |   0  |  F12 |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |      |      |      |      |      |             |      |      |      |      |   0  |  F13 |
+   * |      |      |      |      |      |      |             |      |      |   ,  |   .  |   0  |  F13 |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
    * |      |      |      |      |      |Shift |      |Enter |Shift |      |      | PSCR |  F15 |  F14 |
    * `-------------------------------------------------------------------------------------------------'
@@ -121,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_FN_RGHT] =  LAYOUT( \
       _______,KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,                   KC_F6,  KC_F7,  KC_F8,  KC_F9,  KC_F10,KC_F11, \
       _______,KC_1,   KC_2,   KC_3,   KC_4,   KC_5,                    KC_6,   KC_7,   KC_8,   KC_9,   KC_0,  KC_F12, \
-      _______,_______,_______,_______,_______,_______,                 _______,_______,_______,_______,KC_0,  KC_F13, \
+      _______,_______,_______,_______,_______,_______,                 _______,_______,KC_COMM,KC_DOT ,KC_0,  KC_F13, \
       _______,_______,_______,_______,XXXXXXX,KC_LSHIFT,_______,KC_ENT,KC_RSHIFT,_______,_______,KC_PSCR,KC_F15,KC_F14 \
       )
 };
@@ -151,7 +151,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-      // 薙刀式 
+      // 薙刀式
 
     case NMPD:
       if(record->event.pressed){
@@ -159,7 +159,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_on(2);
       } else {
         layer_off(2);
-        if (timer_elapsed(NMPD_timer) < TAPPING_TERM) {  
+        if (timer_elapsed(NMPD_timer) < TAPPING_TERM) {
           layer_on(2);
         }
       }
@@ -182,7 +182,7 @@ void matrix_init_user(void) {
   uint16_t ngoffkeys[] = {KC_F, KC_G};
   set_naginata(_NAGINATA, ngonkeys, ngoffkeys);
   // 薙刀式
-  
+
 }
 
 #define SPLIT_TRANSPORT_MIRROR

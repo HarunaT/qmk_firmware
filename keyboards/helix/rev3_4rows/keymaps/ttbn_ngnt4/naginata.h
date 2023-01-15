@@ -35,6 +35,7 @@ void tategaki_toggle(void);
 void kouchi_shift_toggle(void);
 void ty_send_string(char *);
 void copyTYtable(void);
+void copyMCtable(void); //追記函數
 
 bool process_naginata(uint16_t, keyrecord_t *);
 // void set_naginata(uint8_t);
