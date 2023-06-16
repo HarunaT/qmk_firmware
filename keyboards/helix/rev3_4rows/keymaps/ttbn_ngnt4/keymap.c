@@ -73,9 +73,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Numpad
    * ,-----------------------------------------.             ,-----------------------------------------.
-   * |      |   !  |   "  |   <  |   >  |   '  |             |   *  |   7  |   8  |   9  |   ^  | NLCK |
+   * |      |   !  |   "  |   <  |   >  |   '  |             |   ?  |   7  |   8  |   9  |   ^  | NLCK |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |   #  |   $  |   (  |   )  |   ~  |             |   -  |   4  |   5  |   6  |   ?  |      |
+   * |      |   #  |   $  |   (  |   )  |   ~  |             |   -  |   4  |   5  |   6  |   *  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * |      |   %  |   &  |   {  |   }  |   |  |             |   +  |   1  |   2  |   3  |   /  |      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
@@ -83,8 +83,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `-------------------------------------------------------------------------------------------------'
    */
   [_NUMPAD] = LAYOUT( \
-      _______,S(KC_1),S(KC_2),KC_LABK,KC_RABK,S(KC_7),                KC_PAST,KC_P7,KC_P8,KC_P9,  KC_EQL, KC_NLCK, \
-      _______,S(KC_3),S(KC_4),S(KC_8),S(KC_9),KC_PLUS,                KC_PMNS,KC_P4,KC_P5,KC_P6,  KC_QUES,_______, \
+      _______,S(KC_1),S(KC_2),KC_LABK,KC_RABK,S(KC_7),                KC_QUES,KC_P7,KC_P8,KC_P9,  KC_EQL, KC_NLCK, \
+      _______,S(KC_3),S(KC_4),S(KC_8),S(KC_9),KC_PLUS,                KC_PMNS,KC_P4,KC_P5,KC_P6,  KC_PAST,_______, \
       _______,S(KC_5),S(KC_6),KC_RCBR,KC_PIPE,S(KC_JYEN),             KC_PPLS,KC_P1,KC_P2,KC_P3,  KC_PSLS,_______, \
       _______,_______,_______,_______,_______,_______,_______,KC_PENT,_______,KC_P0,KC_P0,KC_PDOT,_______,_______ \
       ),
@@ -97,14 +97,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * |      |NG_MAC|LCGSWP|  Dn  |Enter | Del  |             | Mute | End  |  Dn  | PgDn | KOTI |      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
-   * |      |      |      |      |      |Shift | Del  |Enter |Shift | CAPS |      |      |      |      |
+   * |      |      |      |      |      |Shift |      |Enter |Shift | CAPS |      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_FN_LEFT] = LAYOUT( \
       LAG(KC_ESC),NGSW_WIN,LCG_NRM,KC_UP,  NG_TATE,LCA(KC_DEL),            KC__VOLUP,KC_HOME,KC_UP,  KC_PGUP,NG_TAYO,KC_GRV, \
       _______,    NG_SHOS, KC_LEFT,KC_DOWN,KC_RGHT,NG_YOKO,              KC__VOLDOWN,KC_LEFT,KC_DOWN,KC_RGHT,NG_MLV, _______, \
       _______,    NGSW_MAC,LCG_SWP,KC_DOWN,KC_ENT,KC_DEL,                   KC__MUTE,KC_END, KC_DOWN,KC_PGDN,NG_KOTI,_______, \
-      _______,    _______, _______,_______,_______,KC_LSHIFT,KC_DEL,KC_ENT,KC_RSHIFT,KC_CAPS,_______,_______,_______,_______ \
+      _______,   _______, _______,_______,_______,KC_LSHIFT,_______,KC_ENT,KC_RSHIFT,KC_CAPS,_______,_______,_______,_______ \
       ),
 
   /* Function Right (KANA)
