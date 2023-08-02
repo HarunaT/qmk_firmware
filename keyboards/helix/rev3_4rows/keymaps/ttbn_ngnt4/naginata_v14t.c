@@ -1146,9 +1146,13 @@ bool naginata_lookup(int nt, bool shifted) {
         case NG_WIN:
         case NG_LINUX:
           send_string(SS_LCTL("x"));
-          ng_send_unicode_string("(");
+          //ng_send_unicode_string("(");
+          send_string(SS_LSFT(SS_TAP(X_8)));
+          send_string(SS_TAP(X_ENT));
           send_string(SS_LCTL(SS_TAP(X_V)));
-          ng_send_unicode_string(")");
+          //ng_send_unicode_string(")");
+          send_string(SS_LSFT(SS_TAP(X_9)));
+          send_string(SS_TAP(X_ENT));
           ng_spacecopy();
           compress_buffer(nt);
           return true;
