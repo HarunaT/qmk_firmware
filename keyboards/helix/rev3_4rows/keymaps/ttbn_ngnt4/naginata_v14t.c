@@ -188,9 +188,9 @@ const PROGMEM naginata_keymap ngmap[] = {
   {.key = B_Z                      , .kana = "ho"      }, // ほ
   {.key = B_SHFT|B_Z               , .kana = "ho"      }, // ほ
   {.key = B_SHFT|B_F               , .kana = "ma"      }, // ま
-  {.key = B_SHFT|B_S               , .kana = "mi"      }, // み
+  {.key = B_SHFT|B_B               , .kana = "mi"      }, // み
   {.key = B_SHFT|B_COMM            , .kana = "mu"      }, // む
-  {.key = B_SHFT|B_B               , .kana = "me"      }, // め
+  {.key = B_SHFT|B_S               , .kana = "me"      }, // め
   {.key = B_SHFT|B_K               , .kana = "mo"      }, // も
   {.key = B_SHFT|B_H               , .kana = "ya"      }, // や
   {.key = B_SHFT|B_P               , .kana = "yu"      }, // ゆ
@@ -337,7 +337,7 @@ const PROGMEM naginata_keymap ngmap[] = {
   // enter+シフト(連続シフト)
   {.key = B_SHFT|B_V|B_M    , .kana = SS_TAP(X_ENTER)},
   // backspace
-  {.key = B_T|B_Y           , .kana = SS_TAP(X_BSPACE)},
+  //{.key = B_T|B_Y           , .kana = SS_TAP(X_BSPACE)},
 
   {.key = B_J|B_K|B_D       , .kana = "/"}, // ・
 
@@ -410,13 +410,11 @@ const PROGMEM naginata_keymap_long ngmapl[] = {
 const PROGMEM naginata_keymap_long ngmapl_tate[] = {
   {.key = B_T           , .kana = SS_TAP(NGLT)},
   {.key = B_Y           , .kana = SS_TAP(NGRT)},
-  {.key = B_SHFT|B_T           , .kana = SS_TAP(NGUP)},
-  {.key = B_SHFT|B_Y           , .kana = SS_TAP(NGDN)},
 // 編集モード 縦横
   {.key = B_J|B_K|B_V		, .kana = SS_TAP(X_ENTER)SS_TAP(NGDN)}, // {改行}{↓}
 };
 
-static naginata_keymap_long ngmapl_ty[5]; //ngmapl_tate[]の項目數
+static naginata_keymap_long ngmapl_ty[3]; //ngmapl_tate[]の項目數
 static naginata_keymap_long ngmapl_mc[14]; //ngmapl_mac[]の項目數
 
 const PROGMEM naginata_keymap_long ngmapl_mac[] = {
@@ -987,7 +985,8 @@ bool naginata_lookup(int nt, bool shifted) {
       switch (naginata_config.os) {
         case NG_WIN:
         case NG_LINUX:
-          ng_send_unicode_string("『』");
+          ng_send_unicode_string("『");
+          ng_send_unicode_string("』");
           ng_back();
           compress_buffer(nt);
           return true;
@@ -1006,7 +1005,11 @@ bool naginata_lookup(int nt, bool shifted) {
       switch (naginata_config.os) {
         case NG_WIN:
         case NG_LINUX:
-          ng_send_unicode_string("()");
+          //ng_send_unicode_string("(");
+          //ng_send_unicode_string(")");
+          send_string(SS_LSFT(SS_TAP(X_8)));
+          send_string(SS_LSFT(SS_TAP(X_9)));
+          send_string(SS_TAP(X_ENT));
           ng_back();
           compress_buffer(nt);
           return true;
@@ -1025,7 +1028,8 @@ bool naginata_lookup(int nt, bool shifted) {
       switch (naginata_config.os) {
         case NG_WIN:
         case NG_LINUX:
-          ng_send_unicode_string("「」");
+          ng_send_unicode_string("「");
+          ng_send_unicode_string("」");
           ng_back();
           compress_buffer(nt);
           return true;
@@ -1077,7 +1081,8 @@ bool naginata_lookup(int nt, bool shifted) {
       switch (naginata_config.os) {
         case NG_WIN:
         case NG_LINUX:
-          ng_send_unicode_string("【】");
+          ng_send_unicode_string("【");
+          ng_send_unicode_string("】");
           ng_back();
           compress_buffer(nt);
           return true;
@@ -1096,7 +1101,8 @@ bool naginata_lookup(int nt, bool shifted) {
       switch (naginata_config.os) {
         case NG_WIN:
         case NG_LINUX:
-          ng_send_unicode_string("《》");
+          ng_send_unicode_string("《");
+          ng_send_unicode_string("》");
           ng_back();
           compress_buffer(nt);
           return true;
@@ -1215,7 +1221,8 @@ bool naginata_lookup(int nt, bool shifted) {
           ng_send_unicode_string("|");
           send_string(SS_LCTL("v"));
           ng_spacecopy();
-          ng_send_unicode_string("《》");
+          ng_send_unicode_string("《");
+          ng_send_unicode_string("》");
           ng_back();
           compress_buffer(nt);
           return true;
