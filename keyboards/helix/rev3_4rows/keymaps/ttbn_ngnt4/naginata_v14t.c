@@ -302,28 +302,29 @@ const PROGMEM naginata_keymap ngmap[] = {
   {.key = B_V|B_SCLN|B_N           , .kana = "fo"      }, // ふぉ
   {.key = B_V|B_SCLN|B_P           , .kana = "fyu"     }, // ふゅ
   {.key = B_V|B_K|B_O              , .kana = "ixe"     }, // いぇ
-  {.key = B_Q|B_M|B_K              , .kana = "uxi"     }, // うぃ
-  {.key = B_Q|B_M|B_O              , .kana = "uxe"     }, // うぇ
-  {.key = B_Q|B_M|B_N              , .kana = "uxo"     }, // うぉ
-  {.key = B_SHFT|B_Q|B_J           , .kana = "va"      }, // ゔぁ
-  {.key = B_SHFT|B_Q|B_K           , .kana = "vi"      }, // ゔぃ
-  {.key = B_SHFT|B_Q|B_O           , .kana = "ve"      }, // ゔぇ
-  {.key = B_SHFT|B_Q|B_N           , .kana = "vo"      }, // ゔぉ
-  {.key = B_SHFT|B_Q|B_P           , .kana = "vuxyu"   }, // ゔゅ
+  {.key = B_V|B_L|B_J              , .kana = "uxa"     }, // うぁ
+  {.key = B_V|B_L|B_K              , .kana = "uxi"     }, // うぃ
+  {.key = B_V|B_L|B_O              , .kana = "uxe"     }, // うぇ
+  {.key = B_V|B_L|B_N              , .kana = "uxo"     }, // うぉ
+  {.key = B_Q|B_M|B_J              , .kana = "va"      }, // ゔぁ
+  {.key = B_Q|B_M|B_K              , .kana = "vi"      }, // ゔぃ
+  {.key = B_Q|B_M|B_O              , .kana = "ve"      }, // ゔぇ
+  {.key = B_Q|B_M|B_N              , .kana = "vo"      }, // ゔぉ
+  {.key = B_Q|B_M|B_P              , .kana = "vuxyu"   }, // ゔゅ
   {.key = B_V|B_H|B_J              , .kana = "kuxa"    }, // くぁ
   {.key = B_V|B_H|B_K              , .kana = "kuxi"    }, // くぃ
   {.key = B_V|B_H|B_O              , .kana = "kuxe"    }, // くぇ
   {.key = B_V|B_H|B_N              , .kana = "kuxo"    }, // くぉ
-  {.key = B_V|B_H|B_L              , .kana = "kuxwa"   }, // くゎ
+  {.key = B_V|B_H|B_DOT            , .kana = "kuxwa"   }, // くゎ
   {.key = B_F|B_H|B_J              , .kana = "guxa"    }, // ぐぁ
   {.key = B_F|B_H|B_K              , .kana = "guxi"    }, // ぐぃ
   {.key = B_F|B_H|B_O              , .kana = "guxe"    }, // ぐぇ
   {.key = B_F|B_H|B_N              , .kana = "guxo"    }, // ぐぉ
-  {.key = B_F|B_H|B_L              , .kana = "guxwa"   }, // ぐゎ
-  {.key = B_V|B_L|B_J              , .kana = "tsa"     }, // つぁ
-  {.key = B_V|B_L|B_K              , .kana = "tsi"     }, // つぃ
-  {.key = B_V|B_L|B_O              , .kana = "tse"     }, // つぇ
-  {.key = B_V|B_L|B_N              , .kana = "tso"     }, // つぉ
+  {.key = B_F|B_H|B_DOT            , .kana = "guxwa"   }, // ぐゎ
+  {.key = B_F|B_L|B_J              , .kana = "tsa"     }, // つぁ
+  {.key = B_F|B_L|B_K              , .kana = "tsi"     }, // つぃ
+  {.key = B_F|B_L|B_O              , .kana = "tse"     }, // つぇ
+  {.key = B_F|B_L|B_N              , .kana = "tso"     }, // つぉ
 
   // 追加
   {.key = B_SHFT            , .kana = " "},
@@ -347,7 +348,7 @@ const PROGMEM naginata_keymap_long ngmapl[] = {
 // 編集モード Win/Linux
   {.key = B_J|B_K|B_Q		, .kana = SS_LCTL(SS_TAP(X_END))}, // ^{End}
 //{.key = B_J|B_K|B_W		, .kana = ""}, // 『』{改行}{↑}
-  {.key = B_J|B_K|B_E		, .kana = "dhi"}, // /*ディ*/
+//{.key = B_J|B_K|B_E		, .kana = "dhi"}, // /*ディ*/
 //{.key = B_J|B_K|B_R		, .win   = "ヽ",        .mac = "nagidoka"}, // ヽ
 //{.key = B_J|B_K|B_T		, .win   = "〳〵",		.mac = "nagidoku"}, // 〳〵
 //{.key = B_J|B_K|B_A		, .win   = "……",		.mac = "nagitentenn"}, // ……{改行}
@@ -375,12 +376,12 @@ const PROGMEM naginata_keymap_long ngmapl[] = {
   {.key = B_D|B_F|B_COMM	, .kana = SS_TAP(X_DOWN)}, // {↓}
   {.key = B_D|B_F|B_DOT		, .kana = SS_TAP(X_DOWN)SS_TAP(X_DOWN)SS_TAP(X_DOWN)SS_TAP(X_DOWN)SS_TAP(X_DOWN)}, // {↓ 5}
   {.key = B_D|B_F|B_SLSH	, .kana = SS_LSFT(SS_TAP(X_END))SS_TAP(X_BSPACE)}, // +{End}{BS}
-//{.key = B_M|B_COMM|B_Q		, .win   = "×",		.mac = "nagibatu"}, // ×
+  {.key = B_M|B_COMM|B_Q		, .kana = SS_LSFT(SS_TAP(X_SCLN))SS_TAP(X_ENTER)}, // +{;}{改行} =和記號
 //{.key = B_M|B_COMM|B_W		, .kana = ""}, // ^x『^v』{改行}{Space}+{↑}^x
   {.key = B_M|B_COMM|B_E		, .kana = SS_LCTL("x")SS_TAP(X_BSPACE)SS_TAP(X_DELETE)SS_LCTL("v")}, // ^x{BS}{Del}^v =括弧外し
 //{.key = B_M|B_COMM|B_R		, .win   = "ヾ",		.mac = "nagidoga"}, // ヾ
 //{.key = B_M|B_COMM|B_T		, .win   = "〴〵",		.mac = "nagidogu"}, // 〴〵
-  {.key = B_M|B_COMM|B_A		, .kana = SS_LSFT(SS_TAP(X_SCLN))SS_TAP(X_ENTER)}, // +{;}{改行} =和記號
+//{.key = B_M|B_COMM|B_A		, .win   = "×",		.mac = "nagibatu"}, // ×
 //{.key = B_M|B_COMM|B_S		, .kana = ""}, // ^x(^v){改行}{Space}+{↑}^x
   {.key = B_M|B_COMM|B_D		, .kana = "?"SS_TAP(X_ENTER)}, // ？{改行}
 //{.key = B_M|B_COMM|B_F		, .kana = ""}, // ^x「^v」{改行}{Space}+{↑}^x
@@ -444,7 +445,7 @@ const PROGMEM naginata_keymap_unicode ngmapu[] = {
   {.key = B_J|B_K|B_G		, .win   = "ゝ",		.mac = "nagidohi"}, // ゝ
   {.key = B_J|B_K|B_Z		, .win   = "——",		.mac = "nagitatesenni"}, // ││
   {.key = B_J|B_K|B_C		, .win   = "／",		.mac = "naginaname"}, // ／
-  {.key = B_M|B_COMM|B_Q		, .win   = "×",		.mac = "nagibatu"}, // ×
+  {.key = B_M|B_COMM|B_A		, .win   = "×",		.mac = "nagibatu"}, // ×
   {.key = B_M|B_COMM|B_R		, .win   = "ヾ",		.mac = "nagidoga"}, // ヾ
   {.key = B_M|B_COMM|B_T		, .win   = "〴〵",		.mac = "nagidogu"}, // 〴〵
   {.key = B_M|B_COMM|B_G		, .win   = "ゞ",		.mac = "nagidobi"}, // ゞ
