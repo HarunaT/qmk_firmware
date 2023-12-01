@@ -665,11 +665,11 @@ void mac_send_string(const char *str) {
 void ng_send_unicode_string(const char *str) {
   switch (naginata_config.os) {
     case NG_LINUX:
+    case NG_WIN:
       tap_code(KC_MHEN);
       send_unicode_string(str);
       tap_code(KC_HENK);
       break;
-    case NG_WIN:
     case NG_MAC:
       send_unicode_string(str);
       tap_code(KC_ENT);
@@ -1006,11 +1006,8 @@ bool naginata_lookup(int nt, bool shifted) {
       switch (naginata_config.os) {
         case NG_WIN:
         case NG_LINUX:
-          //ng_send_unicode_string("(");
-          //ng_send_unicode_string(")");
-          send_string(SS_LSFT(SS_TAP(X_8)));
-          send_string(SS_LSFT(SS_TAP(X_9)));
-          send_string(SS_TAP(X_ENT));
+          ng_send_unicode_string("(");
+          ng_send_unicode_string(")");
           ng_back();
           compress_buffer(nt);
           return true;
@@ -1044,40 +1041,7 @@ bool naginata_lookup(int nt, bool shifted) {
           break;
       }
       break;
-/*
-    case B_J|B_K|B_G: // {改行}{End}{改行}「」{改行}{↑}
-      switch (naginata_config.os) {
-        case NG_WIN:
-        case NG_LINUX:
-          tap_code(KC_ENT);
-          tap_code(KC_END);
-          tap_code(KC_ENT);
-          ng_send_unicode_string("「」");
-          if (naginata_config.tategaki) {
-            tap_code(KC_UP);
-          } else {
-            tap_code(KC_LEFT);
-          }
-          compress_buffer(nt);
-          return true;
-          break;
-        case NG_MAC:
-          tap_code(KC_ENT);
-          tap_code(KC_END);
-          tap_code(KC_ENT);
-          mac_send_string("nagikakkohiu");
-          mac_send_string("nagikakkomiu");
-          if (naginata_config.tategaki) {
-            tap_code(KC_UP);
-          } else {
-            tap_code(KC_LEFT);
-          }
-          compress_buffer(nt);
-          return true;
-          break;
-      }
-      break;
-*/
+
     case B_J|B_K|B_X: // 【】{改行}{↑}
       switch (naginata_config.os) {
         case NG_WIN:
@@ -1147,13 +1111,9 @@ bool naginata_lookup(int nt, bool shifted) {
         case NG_WIN:
         case NG_LINUX:
           send_string(SS_LCTL("x"));
-          //ng_send_unicode_string("(");
-          send_string(SS_LSFT(SS_TAP(X_8)));
-          send_string(SS_TAP(X_ENT));
+          ng_send_unicode_string("(");
           send_string(SS_LCTL(SS_TAP(X_V)));
-          //ng_send_unicode_string(")");
-          send_string(SS_LSFT(SS_TAP(X_9)));
-          send_string(SS_TAP(X_ENT));
+          ng_send_unicode_string(")");
           ng_spacecopy();
           compress_buffer(nt);
           return true;
