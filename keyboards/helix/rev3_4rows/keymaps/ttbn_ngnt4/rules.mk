@@ -32,3 +32,6 @@ SPACE_CADET_ENABLE = no
 RGBLIGHT_ENABLE = no
 ENCODER_ENABLE = no
 EXTRAKEY_ENABLE = no
+
+# Custom Shift Keysの爲追記
+SRC += custom_shift_keys.c

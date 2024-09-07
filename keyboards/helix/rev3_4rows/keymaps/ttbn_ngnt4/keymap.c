@@ -15,6 +15,16 @@
  */
 #include QMK_KEYBOARD_H
 
+// Custom Shift Keys
+#include "custom_shift_keys.h"
+const custom_shift_key_t custom_shift_keys[] = {
+    {KC_DOT , KC_EXLM}, // Shift . is !
+    {KC_COMM, KC_QUES}, // Shift , is ?
+    {KC_MINS, KC_SLSH }, // Shift - is /
+    {KC_QUOT, KC_SCLN}, // Shift : is ; ... JISの:はQUOT
+    {S(KC_7), S(KC_2)} // Shift ' is " ... JISの'はS7 "はS2
+};
+
 // 薙刀式
 #include "naginata.h"
 NGKEYS naginata_keys;
@@ -46,19 +56,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Qwerty
    * ,-----------------------------------------.             ,-----------------------------------------.
-   * | Esc  |   Q  |   W  |   E  |   R  |   T  |             |   Y  |   U  |   I  |   O  |   P  |  -   |
+   * | Esc  |   Q  |   U  |   A  |   L  |  .!  |             |  -/  |  '"  |   S  |   C  |   K  |  -   |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * | Tab  |   A  |   S  |   D  |   F  |   G  |             |   H  |   J  |   K  |   L  |   ;  |  :   |
+   * | Tab  |   J  |   P  |   O  |   N  |   B  |             |  ,?  |   I  |   H  |   T  |   V  |  :;  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * | Shift|   Z  |   X  |   C  |   V  |   B  |             |   N  |   M  |   ,  |   .  |   /  |  ]   |
+   * | Shift|   X  |   W  |   G  |   F  |   M  |             |   Z  |   E  |   R  |   D  |   Y  |  ]   |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
    * | Ctrl | Alt  | GUI  | NMPD | EISU |SandS | Bksp |Enter |SandS | KANA | JYEN |  @   |  [   |  _   |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_QWERTY] = LAYOUT( \
-      KC_ESC, KC_Q,   KC_W,   KC_E, KC_R, KC_T,                KC_Y, KC_U, KC_I,   KC_O,   KC_P,   KC_MINS, \
-      KC_TAB, KC_A,   KC_S,   KC_D, KC_F, KC_G,                KC_H, KC_J, KC_K,   KC_L,   KC_SCLN,KC_QUOT, \
-      KC_LSFT,KC_Z,   KC_X,   KC_C, KC_V, KC_B,                KC_N, KC_M, KC_COMM,KC_DOT, KC_SLSH,KC_NUHS, \
+      KC_ESC, KC_Q,   KC_U,   KC_A, KC_L, KC_DOT,              KC_MINS, S(KC_7), KC_S, KC_C, KC_K, KC_MINS, \
+      KC_TAB, KC_J,   KC_P,   KC_O, KC_N, KC_B,                KC_COMM, KC_I,    KC_H, KC_T, KC_V, KC_QUOT, \
+      KC_LSFT,KC_X,   KC_W,   KC_G, KC_F, KC_M,                KC_Z,    KC_E,    KC_R, KC_D, KC_Y, KC_NUHS, \
       KC_LCTL,KC_LALT,KC_LGUI,NMPD, EISU, SANDS,KC_BSPC,KC_ENT,SANDS,KANA, KC_JYEN,KC_LBRC,KC_RBRC,KC_RO \
       ),
 
@@ -73,19 +83,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Numpad
    * ,-----------------------------------------.             ,-----------------------------------------.
-   * |      |   !  |   "  |   <  |   >  |   '  |             |   ?  |   7  |   8  |   9  |   ^  | NLCK |
+   * |      |   #  |   $  |   <  |   >  |   |  |             |   =  |   7  |   8  |   9  |   ^  | NLCK |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |   #  |   $  |   (  |   )  |   ~  |             |   -  |   4  |   5  |   6  |   *  |      |
+   * |      |   [  |   ]  |   (  |   )  |   \  |             |   -  |   4  |   5  |   6  |   *  |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |   %  |   &  |   {  |   }  |   |  |             |   +  |   1  |   2  |   3  |   /  |      |
+   * |      |   %  |   &  |   {  |   }  |   ~  |             |   +  |   1  |   2  |   3  |   /  |      |
    * |------+------+------+------+------+------+-------------+------+------+------+------+------+------|
    * |      |      |      |      |      |      |      | Ent  |      |   0  |   ,  |   .  |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
   [_NUMPAD] = LAYOUT( \
-      _______,S(KC_1),S(KC_2),KC_LABK,KC_RABK,S(KC_7),                KC_QUES,KC_P7,KC_P8,KC_P9,  KC_EQL, KC_NLCK, \
-      _______,S(KC_3),S(KC_4),S(KC_8),S(KC_9),KC_PLUS,                KC_PMNS,KC_P4,KC_P5,KC_P6,  KC_PAST,_______, \
-      _______,S(KC_5),S(KC_6),KC_RCBR,KC_PIPE,S(KC_JYEN),             KC_PPLS,KC_P1,KC_P2,KC_P3,  KC_PSLS,_______, \
+      _______,S(KC_3),S(KC_4),KC_LABK,KC_RABK,S(KC_JYEN),             KC_PEQL,KC_P7,KC_P8,KC_P9,  KC_EQL, KC_NLCK, \
+      _______,KC_RBRC,KC_NUHS,S(KC_8),S(KC_9),A(KC_JYEN),             KC_PMNS,KC_P4,KC_P5,KC_P6,  KC_PAST,_______, \
+      _______,S(KC_5),S(KC_6),KC_RCBR,KC_PIPE,KC_PLUS,                KC_PPLS,KC_P1,KC_P2,KC_P3,  KC_PSLS,_______, \
       _______,_______,_______,_______,_______,_______,_______,KC_PENT,_______,KC_P0,KC_COMM,KC_PDOT,_______,_______ \
       ),
 
@@ -129,6 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 uint16_t NMPD_timer;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_custom_shift_keys(keycode, record)) { return false; } // Custom Shift Keysの爲の1行
   switch (keycode) {
      // 薙刀式
     case EISU:

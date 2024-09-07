@@ -28,5 +28,6 @@
 	    "editor.formatOnSave": false
     },
     "cmake.configureOnOpen": true,
-    "cmake.sourceDirectory": "${workspaceFolder}/lib/googletest"
+    "cmake.sourceDirectory": "${workspaceFolder}/lib/googletest",
+    "makefile.configureOnOpen": false
 }
