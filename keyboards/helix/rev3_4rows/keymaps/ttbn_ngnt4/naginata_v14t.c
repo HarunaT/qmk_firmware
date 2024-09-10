@@ -338,7 +338,7 @@ const PROGMEM naginata_keymap ngmap[] = {
   // enter+シフト(連続シフト)
   {.key = B_SHFT|B_V|B_M    , .kana = SS_TAP(X_ENTER)},
   // backspace
-  //{.key = B_T|B_Y           , .kana = SS_TAP(X_BSPACE)},
+  //{.key = B_T|B_Y           , .kana = SS_TAP(X_BSPC)},
 
   {.key = B_J|B_K|B_D       , .kana = "/"}, // ・
 
@@ -365,7 +365,7 @@ const PROGMEM naginata_keymap_long ngmapl[] = {
   {.key = B_D|B_F|B_U		, .kana = SS_TAP(X_UP)SS_TAP(X_UP)SS_TAP(X_UP)SS_TAP(X_UP)SS_TAP(X_UP)}, // {↑ 5}
   {.key = B_D|B_F|B_I		, .kana = SS_TAP(X_UP)}, // {↑}
   {.key = B_D|B_F|B_O		, .kana = SS_TAP(X_RIGHT)SS_TAP(X_RIGHT)SS_TAP(X_RIGHT)SS_TAP(X_RIGHT)SS_TAP(X_RIGHT)}, // {→ 5}
-  {.key = B_D|B_F|B_P		, .kana = SS_LSFT(SS_TAP(X_HOME))SS_TAP(X_BSPACE)}, // +{Home}{BS}
+  {.key = B_D|B_F|B_P		, .kana = SS_LSFT(SS_TAP(X_HOME))SS_TAP(X_BSPC)}, // +{Home}{BS}
   {.key = B_D|B_F|B_H		, .kana = SS_TAP(X_ENTER)SS_TAP(X_END)}, // {Enter}{End}
   {.key = B_D|B_F|B_J		, .kana = SS_TAP(X_LEFT)}, // {←}
   {.key = B_D|B_F|B_K		, .kana = SS_TAP(X_DELETE)}, // {Del}
@@ -375,10 +375,10 @@ const PROGMEM naginata_keymap_long ngmapl[] = {
   {.key = B_D|B_F|B_M		, .kana = SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)SS_TAP(X_LEFT)}, // {← 5}
   {.key = B_D|B_F|B_COMM	, .kana = SS_TAP(X_DOWN)}, // {↓}
   {.key = B_D|B_F|B_DOT		, .kana = SS_TAP(X_DOWN)SS_TAP(X_DOWN)SS_TAP(X_DOWN)SS_TAP(X_DOWN)SS_TAP(X_DOWN)}, // {↓ 5}
-  {.key = B_D|B_F|B_SLSH	, .kana = SS_LSFT(SS_TAP(X_END))SS_TAP(X_BSPACE)}, // +{End}{BS}
+  {.key = B_D|B_F|B_SLSH	, .kana = SS_LSFT(SS_TAP(X_END))SS_TAP(X_BSPC)}, // +{End}{BS}
   {.key = B_M|B_COMM|B_Q		, .kana = SS_LSFT(SS_TAP(X_SCLN))SS_TAP(X_ENTER)}, // +{;}{改行} =和記號
 //{.key = B_M|B_COMM|B_W		, .kana = ""}, // ^x『^v』{改行}{Space}+{↑}^x
-  {.key = B_M|B_COMM|B_E		, .kana = SS_LCTL("x")SS_TAP(X_BSPACE)SS_TAP(X_DELETE)SS_LCTL("v")}, // ^x{BS}{Del}^v =括弧外し
+//{.key = B_M|B_COMM|B_E		, .kana = SS_LCTL("x")SS_TAP(X_BSPC)SS_TAP(X_DELETE)SS_LCTL("v")}, // ^x{BS}{Del}^v =括弧外し
 //{.key = B_M|B_COMM|B_R		, .win   = "ヾ",		.mac = "nagidoga"}, // ヾ
 //{.key = B_M|B_COMM|B_T		, .win   = "〴〵",		.mac = "nagidogu"}, // 〴〵
 //{.key = B_M|B_COMM|B_A		, .win   = "×",		.mac = "nagibatu"}, // ×
@@ -416,17 +416,17 @@ const PROGMEM naginata_keymap_long ngmapl_tate[] = {
 };
 
 static naginata_keymap_long ngmapl_ty[3]; //ngmapl_tate[]の項目數
-static naginata_keymap_long ngmapl_mc[14]; //ngmapl_mac[]の項目數
+static naginata_keymap_long ngmapl_mc[13]; //ngmapl_mac[]の項目數
 
 const PROGMEM naginata_keymap_long ngmapl_mac[] = {
 // 編集モード Mac
   {.key = B_J|B_K|B_Q		, .kana = SS_LCMD(SS_TAP(NGLT))}, // Cmd{←} 書類末
   {.key = B_D|B_F|B_Y		, .kana = SS_LCMD(SS_TAP(NGUP))}, // Cmd{↑} 行頭
-  {.key = B_D|B_F|B_P		, .kana = SS_LSFT(SS_LCMD(SS_TAP(NGUP)))SS_TAP(X_BSPACE)}, // +{Cmd{↑}}{BS} 行頭削除
+  {.key = B_D|B_F|B_P		, .kana = SS_LSFT(SS_LCMD(SS_TAP(NGUP)))SS_TAP(X_BSPC)}, // +{Cmd{↑}}{BS} 行頭削除
   {.key = B_D|B_F|B_H		, .kana = SS_TAP(X_ENTER)SS_LCMD(SS_TAP(NGDN))}, // {改行}Cmd{↓} 確定行末
   {.key = B_D|B_F|B_N		, .kana = SS_LCMD(SS_TAP(NGDN))}, // Cmd{↓} 行末
-  {.key = B_D|B_F|B_SLSH		, .kana = SS_LSFT(SS_LCMD(SS_TAP(NGDN)))SS_TAP(X_BSPACE)}, // +{Cmd{↓}}{BS} 行末削除
-  {.key = B_M|B_COMM|B_E		, .kana = SS_LCMD("x")SS_TAP(X_BSPACE)SS_TAP(X_DELETE)SS_LCMD("v")}, // Cmd{x}{BS}{Del}Cmd{v}
+  {.key = B_D|B_F|B_SLSH		, .kana = SS_LSFT(SS_LCMD(SS_TAP(NGDN)))SS_TAP(X_BSPC)}, // +{Cmd{↓}}{BS} 行末削除
+//{.key = B_M|B_COMM|B_E		, .kana = SS_LCMD("x")SS_TAP(X_BSPC)SS_TAP(X_DELETE)SS_LCMD("v")}, // Cmd{x}{BS}{Del}Cmd{v}
   {.key = B_C|B_V|B_Y		, .kana = SS_LSFT(SS_LCMD(SS_TAP(NGUP)))}, // +{Cmd{↑}} 行頭選擇
   {.key = B_C|B_V|B_P		, .kana = SS_LSFT(SS_LCTL("a"))}, // +{^a} 段落頭選擇
   {.key = B_C|B_V|B_H		, .kana = SS_LCTL("k")}, // ^k 片假名變換
@@ -479,8 +479,8 @@ void naginata_on(void) {
   naginata_clear();
   layer_on(naginata_layer);
 
-  tap_code(KC_LANG1); // Mac
-  tap_code(KC_HENK); // Win
+  tap_code(KC_LNG1); // Mac
+  tap_code(KC_INT4); // Win
 }
 
 // 薙刀式をオフ
@@ -490,8 +490,8 @@ void naginata_off(void) {
   naginata_clear();
   layer_off(naginata_layer);
 
-  tap_code(KC_LANG2); // Mac
-  tap_code(KC_MHEN); // Win
+  tap_code(KC_LNG2); // Mac
+  tap_code(KC_INT5); // Win
 }
 
 // 薙刀式のon/off状態を返す
@@ -521,13 +521,13 @@ void switchOS(uint8_t os) {
 void ng_set_unicode_mode(uint8_t os) {
   switch (os) {
     case NG_WIN:
-      set_unicode_input_mode(UC_WINC);
+      set_unicode_input_mode(UNICODE_MODE_WINCOMPOSE);
       break;
     case NG_MAC:
-      set_unicode_input_mode(UC_MAC);
+      set_unicode_input_mode(UNICODE_MODE_MACOS);
       break;
     case NG_LINUX:
-      set_unicode_input_mode(UC_LNX);
+      set_unicode_input_mode(UNICODE_MODE_LINUX);
       break;
   }
 }
@@ -656,9 +656,9 @@ void ng_show_os(void) {
 
 void mac_send_string(const char *str) {
   send_string(str);
-  if (!naginata_config.live_conv) tap_code(KC_LANG1); //ATOK対応のため追加
+  if (!naginata_config.live_conv) tap_code(KC_LNG1); //ATOK対応のため追加
   if (!naginata_config.live_conv) tap_code(KC_SPC);
-  tap_code(KC_LANG1); //ATOK対応のため追加
+  tap_code(KC_LNG1); //ATOK対応のため追加
   tap_code(KC_ENT);
 }
 
@@ -666,9 +666,9 @@ void ng_send_unicode_string(const char *str) {
   switch (naginata_config.os) {
     case NG_LINUX:
     case NG_WIN:
-      tap_code(KC_MHEN);
+      tap_code(KC_INT4);
       send_unicode_string(str);
-      tap_code(KC_HENK);
+      tap_code(KC_INT5);
       break;
     case NG_MAC:
       send_unicode_string(str);
@@ -683,12 +683,12 @@ static int n_modifier = 0;
 
 bool process_modifier(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case KC_LCTRL:
-    case KC_LSHIFT:
+    case KC_LCTL:
+    case KC_LSFT:
     case KC_LALT:
     case KC_LGUI:
-    case KC_RCTRL:
-    case KC_RSHIFT:
+    case KC_RCTL:
+    case KC_RSFT:
     case KC_RALT:
     case KC_RGUI:
     case LCTL_T(0x01) ... LCTL_T(0xFF):
@@ -1101,6 +1101,26 @@ bool naginata_lookup(int nt, bool shifted) {
           mac_send_string("nagikakkomie");
           ng_spacecopy();
           compress_buffer(nt);
+          return true;
+          break;
+      }
+      break;
+
+    case B_M|B_COMM|B_E: // ^x{BS}{Del}^v =括弧外し
+      switch (naginata_config.os) {
+        case NG_WIN:
+        case NG_LINUX:
+          send_string(SS_LCTL("x"));
+          send_string(SS_TAP(X_BSPC));
+          send_string(SS_TAP(X_DELETE));
+          send_string(SS_LCTL("v"));
+          return true;
+          break;
+        case NG_MAC:
+          send_string(SS_LCMD("x"));
+          send_string(SS_TAP(X_BSPC));
+          send_string(SS_TAP(X_DELETE));
+          send_string(SS_LCMD("v"));
           return true;
           break;
       }

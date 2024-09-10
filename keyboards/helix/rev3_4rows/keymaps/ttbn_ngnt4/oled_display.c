@@ -51,7 +51,7 @@ static void render_layer_status(void) {
            break;
         default:
            oled_write_P(PSTR("UNDEF-"), false);
-           
+
     }
 }
 */
@@ -106,13 +106,14 @@ static void render_logo(void) {
 }
 
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
   if(is_keyboard_master()){
     render_status();
   }else{
     render_logo();
     //render_layer_status();
   }
+  return false;
 }
 
 #endif
